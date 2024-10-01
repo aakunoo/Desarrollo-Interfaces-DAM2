@@ -92,6 +92,7 @@ public class HolaMundoPersonalizado extends javax.swing.JFrame {
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed
         lblSaludo.setText("Bienvenido a DII "+ txtNombre.getText() + "! ^^");
+        
     }//GEN-LAST:event_bt1ActionPerformed
 
     /**
