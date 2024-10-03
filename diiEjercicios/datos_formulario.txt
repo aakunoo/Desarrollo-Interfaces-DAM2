@@ -1,9 +1,0 @@
-Nombre: Jeronimo
-Apellidos: Vicente
-NIF: 70925711J
-Dirección: Salamanca, Espana
-Teléfono: +34 622468102
-Email: jerovicvid@gmail.com
-Ciclo: Desarrollo de Aplicaciones Multiplataforma
-Turno: Matutino
-Actividades extraescolares: Ajedrez Baloncesto

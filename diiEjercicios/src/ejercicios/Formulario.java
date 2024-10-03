@@ -46,20 +46,20 @@ public class Formulario extends javax.swing.JFrame {
         // Se pueden añadir más países si es necesario
     }
 
- /**
-     * Método que valida los campos obligatorios al presionar el botón "Enviar".
-     */
  private boolean validarFormulario() {
-        // Validar campos obligatorios (nombre, apellidos, NIF, dirección, teléfono, email, ciclo, turno)
-        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() ||
-            jTextField3.getText().isEmpty() || jTextField4.getText().isEmpty() ||
-            jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty() ||
-            jComboBox1.getSelectedIndex() == 0 || jComboBox2.getSelectedIndex() == 0) {
+        // Para poner campos "obligatorios"
+        if (jTextField1.getText().trim().isEmpty() || jTextField2.getText() .trim(). isEmpty() ||
+            jTextField3.getText().trim().isEmpty() || jTextField4.getText().trim().isEmpty() ||
+            jTextField5.getText().trim().isEmpty() || jTextField6.getText().trim().isEmpty() ||
+            jComboBox1.getSelectedIndex() == 0 || jComboBox2.getSelectedIndex() == 0) 
+            
+        {
+            
 
             JOptionPane.showMessageDialog(this, "Por favor, rellena todos los campos obligatorios.", "Campos obligatorios", JOptionPane.WARNING_MESSAGE);
             return false;
         }
-        // Validar teléfono de contacto (reconociendo extensiones internacionales) (Internet)
+        // para validar teléfono de contacto (reconociendo extensiones internacionales) (Internet)
         String telefono = jTextField5.getText();
         String codigoPais = telefono.split("\\s+")[0]; // Obtener el código del país
 
@@ -73,14 +73,14 @@ public class Formulario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, introduce un número de teléfono válido con la extensión correcta (Ejemplo: +34 612345678).", "Teléfono incorrecto", JOptionPane.WARNING_MESSAGE);
             return false;
         }
-                // Validar el formato del correo electrónico
+                // Para validar el formato de correo electronico, ayuda de internet.
         String email = jTextField6.getText();
         if (!email.matches("^(.+)@(gmail|yahoo|outlook|hotmail)\\.(com|es)$")) {
             JOptionPane.showMessageDialog(this, "Por favor, introduce un correo electrónico válido (Ej: gmail.com, yahoo.com).", "Correo incorrecto", JOptionPane.WARNING_MESSAGE);
             return false;
         }
 
-        // Validar el formato del NIF/DNI (8 números y 1 letra)
+        // Para poner que el DNI tenga que tener 8 numeros y una letra
         String nif = jTextField3.getText();
         if (!nif.matches("^[0-9]{8}[A-Za-z]$")) {
             JOptionPane.showMessageDialog(this, "Por favor, introduce un NIF/DNI válido (Ej: 12345678A).", "NIF/DNI incorrecto", JOptionPane.WARNING_MESSAGE);
@@ -90,7 +90,7 @@ public class Formulario extends javax.swing.JFrame {
     }
 
     /**
-     * Este método limpia todos los campos del formulario.
+     * metodo para limpiar los campos al darle a "limpiar"
      */
   private void limpiarFormulario() {
       isCleaning = true; // Activamos la bandera de limpieza
@@ -100,6 +100,7 @@ public class Formulario extends javax.swing.JFrame {
         jTextField4.setText(""); // Limpiar campo "Dirección"
         jTextField5.setText(""); // Limpiar campo "Teléfono"
         jTextField6.setText(""); // Limpiar campo "Email"
+        jFormattedTextField1.setText("");//Limpiar el campo "C.P"
         jComboBox1.setSelectedIndex(0); // Reiniciar selección de "Ciclo"
         jComboBox2.setSelectedIndex(0); // Reiniciar selección de "Turno"
         jSpinner1.setValue(0); // Reiniciar día (vacío)
@@ -115,14 +116,30 @@ public class Formulario extends javax.swing.JFrame {
      * Este método crea un archivo .txt con los datos del formulario al presionar "Enviar".
      */
     private void generarArchivo() throws IOException {
-        // Crear el archivo en el directorio del proyecto
-        File file = new File(System.getProperty("user.dir"), "datos_formulario.txt");
+        
+         // para obtener el nombre
+        String nombre = jTextField1.getText();
+    
+        // para crear el archivo con el nombre que se haya proporcionado.
+        String nombreArchivo = "Formulario" + nombre + ".txt";
+    
+        // esta es la ruta a la carpeta del proyecto donde se guardaran los formularios
+        File directorio = new File(System.getProperty("user.dir"), "ejFormularios-txt");
 
-        try (FileWriter escritor = new FileWriter(file)) {
+        // para verificar si existe la carpeta y si no es asi crearla.
+        if (!directorio.exists()) {
+        directorio.mkdir();
+    }
+
+        // creo el file en el directorio del proyecto
+        File f = new File(directorio, nombreArchivo);
+
+        try (FileWriter escritor = new FileWriter(f)) {
             escritor.write("Nombre: " + jTextField1.getText() + "\n");
             escritor.write("Apellidos: " + jTextField2.getText() + "\n");
             escritor.write("NIF: " + jTextField3.getText() + "\n");
             escritor.write("Dirección: " + jTextField4.getText() + "\n");
+            escritor.write("Codigo Postal: " + jFormattedTextField1.getText() + "\n");
             escritor.write("Teléfono: " + jTextField5.getText() + "\n");
             escritor.write("Email: " + jTextField6.getText() + "\n");
             escritor.write("Ciclo: " + jComboBox1.getSelectedItem() + "\n");
@@ -132,23 +149,23 @@ public class Formulario extends javax.swing.JFrame {
                          (jCheckBox2.isSelected() ? "Futbol Sala " : "") +
                          (jCheckBox3.isSelected() ? "Baloncesto" : "") + "\n");
         }
-        JOptionPane.showMessageDialog(this, "Los datos han sido guardados en un archivo de texto en el directorio del proyecto.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Se ha enviado tu formulario sin problemas. ¡Gracias! ", "Éxito", JOptionPane.INFORMATION_MESSAGE);  
     }
 
         /**
-     * Método para validar la fecha de nacimiento (evitar día 31 en meses con 30 días).
+     * metodo para validar la fecha de nacimiento evitando el dia 31 en meses con 30 dias.
      */
     private void validarFechaNacimiento() {
         int dia = (int) jSpinner1.getValue();
         int mes = (int) jSpinner2.getValue();
 
-        // Si el mes es abril, junio, septiembre o noviembre, y el día es 31, resetear el día
+        // Meses con30 dias.
         if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia == 31) {
             JOptionPane.showMessageDialog(this, "Este mes no tiene 31 días. Ajustando el día a 30.", "Fecha no válida", JOptionPane.WARNING_MESSAGE);
             jSpinner1.setValue(30); // Ajustar el día a 30
         }
 
-        // Validar febrero (mes 2), ajustar días según si es bisiesto o no
+        // validamos que febrero tiene 28 dias, y si el año es bisiesto o no.
         if (mes == 2) {
             int año = (int) jSpinner3.getValue();
             if (año % 4 == 0 && año % 100 != 0 || año % 400 == 0) { // Año bisiesto
@@ -156,7 +173,7 @@ public class Formulario extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Febrero en año bisiesto solo tiene 29 días. Ajustando el día a 29.", "Fecha no válida", JOptionPane.WARNING_MESSAGE);
                     jSpinner1.setValue(29); // Ajustar a 29
                 }
-            } else { // Año no bisiesto
+            } else { // para un año no bisiesto
                 if (dia > 28) {
                     JOptionPane.showMessageDialog(this, "Febrero solo tiene 28 días en año no bisiesto. Ajustando el día a 28.", "Fecha no válida", JOptionPane.WARNING_MESSAGE);
                     jSpinner1.setValue(28); // Ajustar a 28
@@ -165,10 +182,6 @@ public class Formulario extends javax.swing.JFrame {
         }
     }
     
-        /**
-     * Método para configurar el autocompletado del campo de dirección.
-     */
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -206,6 +219,8 @@ public class Formulario extends javax.swing.JFrame {
         jCheckBox3 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
@@ -323,6 +338,20 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setText("C.P:");
+
+        try {
+            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -336,13 +365,11 @@ public class Formulario extends javax.swing.JFrame {
                             .addComponent(lblform, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
-                                .addGap(17, 17, 17)
+                                .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField3)
                                     .addComponent(jTextField1))))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -375,10 +402,6 @@ public class Formulario extends javax.swing.JFrame {
                                 .addGap(27, 27, 27)
                                 .addComponent(jSpinner3))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField4))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel7)
@@ -388,6 +411,17 @@ public class Formulario extends javax.swing.JFrame {
                                     .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4)
+                            .addComponent(jFormattedTextField1))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -417,6 +451,10 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -445,7 +483,7 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(jCheckBox2)
                     .addComponent(jCheckBox1)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -461,16 +499,17 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-            String telefono = jTextField5.getText(); // Obtener el valor del campo de teléfono
+  //Esto hecho por internet 
+        String telefono = jTextField5.getText(); // Obtener el valor del campo de teléfono
     String codigoPais = telefono.split("\\s+")[0]; // Obtener el código del país (ejemplo: +34)
 
-    // Validar que la extensión del país está en el diccionario
+    // Valido que la extensión del país está en el diccionario 
     if (!countryCodes.containsKey(codigoPais)) {
         JOptionPane.showMessageDialog(this, "Extensión de teléfono no válida. Ejemplo: +34 para España.", "Teléfono incorrecto", JOptionPane.WARNING_MESSAGE);
         return; // No continuar si la extensión es incorrecta
     }
 
-    // Validar el formato del teléfono completo (Ejemplo: +34 612345678)
+    // Valido el formato del teléfono completo (Ejemplo: +34 612345678)Tiene que ser como el ejemplo
     if (!telefono.matches("\\+\\d{2}\\s?\\d{9}$")) {
         JOptionPane.showMessageDialog(this, "Por favor, introduce un número de teléfono válido con la extensión correcta (Ejemplo: +34 612345678).", "Teléfono incorrecto", JOptionPane.WARNING_MESSAGE);
     }
@@ -489,12 +528,12 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         limpiarFormulario(); // Llamar al método para limpiar el formulario directamente
+         limpiarFormulario(); // para llamar al método para limpiar el formulario directamente
     
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Validar los campos y generar el archivo si todo es válido
+        // para validar los campos y generar el archivo si todo es válido
         if (validarFormulario()) {
             try {
                 validarFechaNacimiento(); // Verificar que la fecha sea válida
@@ -517,6 +556,10 @@ public class Formulario extends javax.swing.JFrame {
     private void jSpinner3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSpinner3FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_jSpinner3FocusGained
+
+    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -551,8 +594,10 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
