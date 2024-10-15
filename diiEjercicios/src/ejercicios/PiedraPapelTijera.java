@@ -5,7 +5,9 @@
 package ejercicios;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -142,27 +144,33 @@ public class PiedraPapelTijera extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Piedra");
         jRadioButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\file(1).png")); // NOI18N
+        jRadioButton1.setRolloverEnabled(false);
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
+                cambiarColorTexto(evt);
             }
         });
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Papel");
         jRadioButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\file(2).png")); // NOI18N
+        jRadioButton2.setRolloverEnabled(false);
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
+                cambiarColorTexto(evt);
             }
         });
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Tijeras");
         jRadioButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\file.jpg")); // NOI18N
+        jRadioButton3.setRolloverEnabled(false);
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton3ActionPerformed(evt);
+                cambiarColorTexto(evt);
             }
         });
 
@@ -303,8 +311,18 @@ public class PiedraPapelTijera extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-   
+
     }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void cambiarColorTexto(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarColorTexto
+   JRadioButton seleccionado = (JRadioButton) evt.getSource();
+   
+   jRadioButton1.setForeground(Color.yellow);
+   jRadioButton2.setForeground(Color.yellow);
+   jRadioButton3.setForeground(Color.yellow);
+   
+   seleccionado.setForeground (Color.RED);
+    }//GEN-LAST:event_cambiarColorTexto
 
     /**
      * @param args the command line arguments
