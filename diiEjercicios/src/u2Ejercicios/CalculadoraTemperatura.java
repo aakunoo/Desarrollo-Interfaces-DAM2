@@ -1,4 +1,4 @@
-package ejercicios;
+package u2Ejercicios;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.UIManager;
