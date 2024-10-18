@@ -5,6 +5,8 @@
 package u2Ejercicios;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -13,7 +15,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Manana
  */
 public class Deslizador extends javax.swing.JFrame {
-
+    private ImageIcon original = new ImageIcon("C:\\Users\\Manana\\Desktop\\Desarrollo-Interfaces-DAM2\\diiEjercicios\\src\\u2Ejercicios\\Imagenes\\goku_base(1).jpg");
     /**
      * Creates new form Deslizador
      */
@@ -38,38 +40,52 @@ public class Deslizador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jSlider1.setMaximum(5);
+        jSlider1.setMaximum(10);
         jSlider1.setMinimum(1);
         jSlider1.setMinorTickSpacing(1);
         jSlider1.setPaintTicks(true);
+        jSlider1.setValue(jSlider1.getMaximum());
+        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider1StateChanged(evt);
+            }
+        });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\goku base(1).jpg")); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\goku_base(1).jpg")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(324, 324, 324))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(jLabel1)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addGap(80, 80, 80))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+       Image imagenEscalada = original.getImage().getScaledInstance(jSlider1.getValue() * original.getIconWidth()/10, jSlider1.getValue() * original.getIconHeight()/10, java.awt.Image.SCALE_SMOOTH);
+ 
+        jLabel1.setIcon(new ImageIcon(imagenEscalada));
+    }//GEN-LAST:event_jSlider1StateChanged
 
     /**
      * @param args the command line arguments
