@@ -147,7 +147,7 @@ public class PiedraPapelTijera extends javax.swing.JFrame {
         jRadioButton1.setRolloverEnabled(false);
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
                 cambiarColorTexto(evt);
             }
         });
@@ -160,6 +160,7 @@ public class PiedraPapelTijera extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
                 cambiarColorTexto(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -171,6 +172,7 @@ public class PiedraPapelTijera extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton3ActionPerformed(evt);
                 cambiarColorTexto(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -309,10 +311,6 @@ public class PiedraPapelTijera extends javax.swing.JFrame {
         jLabel4.setText(String.valueOf(victoriasMaquina));
     }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void cambiarColorTexto(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarColorTexto
    JRadioButton seleccionado = (JRadioButton) evt.getSource();

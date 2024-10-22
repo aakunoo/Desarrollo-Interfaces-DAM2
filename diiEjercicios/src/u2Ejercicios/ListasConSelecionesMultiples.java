@@ -33,7 +33,6 @@ public class ListasConSelecionesMultiples extends javax.swing.JFrame {
         lista = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         lbTexto = new javax.swing.JLabel();
-        jbConf = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,18 +41,16 @@ public class ListasConSelecionesMultiples extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        lista.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jbConfActionPermorfed(evt);
+            }
+        });
         jScrollPane1.setViewportView(lista);
 
         jLabel1.setText("Selecciona opciones:");
 
         lbTexto.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        jbConf.setText("Confirmar");
-        jbConf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbConfActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,8 +60,7 @@ public class ListasConSelecionesMultiples extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jbConf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addGap(45, 45, 45)
                 .addComponent(lbTexto, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                 .addContainerGap())
@@ -78,16 +74,14 @@ public class ListasConSelecionesMultiples extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbConf)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfActionPerformed
-        lbTexto.setText("<html>");
+    private void jbConfActionPermorfed(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jbConfActionPermorfed
+               lbTexto.setText("<html>");
         
         if (lista.getSelectedValuesList().isEmpty()) {
             lbTexto.setForeground(Color.red);
@@ -104,8 +98,7 @@ public class ListasConSelecionesMultiples extends javax.swing.JFrame {
         }
 
         lbTexto.setText(lbTexto.getText() + "</ol></html>");
-
-    }//GEN-LAST:event_jbConfActionPerformed
+    }//GEN-LAST:event_jbConfActionPermorfed
 
     /**
      * @param args the command line arguments
@@ -146,7 +139,6 @@ public class ListasConSelecionesMultiples extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbConf;
     private javax.swing.JLabel lbTexto;
     private javax.swing.JList<String> lista;
     // End of variables declaration//GEN-END:variables

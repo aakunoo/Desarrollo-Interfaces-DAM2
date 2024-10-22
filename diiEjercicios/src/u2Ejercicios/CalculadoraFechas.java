@@ -91,16 +91,21 @@ public class CalculadoraFechas extends javax.swing.JFrame {
         );
 
         jSpinner1.setModel(new javax.swing.SpinnerDateModel());
-
-        jSpinner2.setModel(new javax.swing.SpinnerDateModel());
-
-        jButton1.setBackground(new java.awt.Color(204, 255, 204));
-        jButton1.setText("Calcular");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jSpinner2.setModel(new javax.swing.SpinnerDateModel());
+        jSpinner2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(204, 255, 204));
+        jButton1.setText("Calcular");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -183,7 +188,7 @@ public class CalculadoraFechas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       // Obtener las fechas seleccionadas en los spinners
         Date fechaInicio = (Date) jSpinner2.getValue();
         Date fechaFin = (Date) jSpinner1.getValue();
@@ -192,7 +197,7 @@ public class CalculadoraFechas extends javax.swing.JFrame {
         String resultado = calcularDiferenciaFechas(fechaInicio, fechaFin);
         
         // Mostrar el resultado en el campo de texto
-        jTextField1.setText(resultado);
+        jTextField1.setText(resultado);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -6,6 +6,7 @@ package u2Ejercicios;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.event.ChangeEvent;
 
 /**
  *
@@ -38,9 +39,14 @@ public class Bombilla extends javax.swing.JFrame {
 
         jToggleButton1.setForeground(new java.awt.Color(102, 255, 102));
         jToggleButton1.setText("ON");
+        jToggleButton1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jToggleButton1ActionPerformed1(evt);
             }
         });
 
@@ -71,8 +77,8 @@ public class Bombilla extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        Icon bombillaEnc = new ImageIcon("C:\\Users\\Manana\\Downloads\\bombillaApagada.jpg");
+    private void jToggleButton1ActionPerformed(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+                Icon bombillaEnc = new ImageIcon("C:\\Users\\Manana\\Downloads\\bombillaApagada.jpg");
         Icon bombillaApagada = new ImageIcon("C:\\Users\\Manana\\Downloads\\bombillaEnc.jpg");
         
         if (jToggleButton1.isSelected()) {
@@ -89,6 +95,10 @@ public class Bombilla extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jToggleButton1ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed1
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed1
 
     /**
      * @param args the command line arguments
