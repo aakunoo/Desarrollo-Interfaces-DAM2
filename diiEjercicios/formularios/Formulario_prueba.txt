@@ -1,0 +1,10 @@
+Nombre: prueba
+Apellidos: prueb
+NIF: a
+Dirección: pruebaa
+C.P.: 11111
+Teléfono: 622468102
+Email: jealvivi@gmail.com
+Ciclo: Desarrollo Web
+Turno: Matutino
+Actividades extraescolares: Ajedrez Futbol Sala 

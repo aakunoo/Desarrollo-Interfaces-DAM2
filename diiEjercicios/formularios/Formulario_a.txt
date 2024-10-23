@@ -1,0 +1,10 @@
+Nombre: a
+Apellidos: a
+NIF: a
+Dirección: a
+C.P.: 37185
+Teléfono: 22222222
+Email: jealvivi@gmail.com
+Ciclo: Desarrollo de Aplicaciones Multiplataforma
+Turno: Matutino
+Actividades extraescolares: Ajedrez Futbol Sala Baloncesto
