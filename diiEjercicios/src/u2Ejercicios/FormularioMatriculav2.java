@@ -80,6 +80,11 @@ public class FormularioMatriculav2 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 255));
         setForeground(java.awt.Color.darkGray);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         lblform.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblform.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -250,29 +255,13 @@ public class FormularioMatriculav2 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblform, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(21, 21, 21)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField1))))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(60, 60, 60)
-                        .addComponent(jTextField3)
-                        .addContainerGap())
+                    .addComponent(lblform, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(304, 304, 304)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(21, 21, 21))
+                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(23, 23, 23)
@@ -281,12 +270,11 @@ public class FormularioMatriculav2 extends javax.swing.JFrame {
                         .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(23, 23, 23)
                         .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(15, 15, 15))
+                        .addGap(9, 9, 9))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField5)
-                        .addContainerGap())
+                        .addComponent(jTextField5))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
@@ -294,8 +282,7 @@ public class FormularioMatriculav2 extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jSpinner2)
                         .addGap(27, 27, 27)
-                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -305,17 +292,26 @@ public class FormularioMatriculav2 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField6)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel11))
-                        .addGap(22, 22, 22)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField4)
-                            .addComponent(jFormattedTextField1))
-                        .addContainerGap())))
+                            .addComponent(jFormattedTextField1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField3))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +335,7 @@ public class FormularioMatriculav2 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -376,11 +372,11 @@ public class FormularioMatriculav2 extends javax.swing.JFrame {
                     .addComponent(jCheckBox2)
                     .addComponent(jCheckBox1)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(26, 26, 26))
+                .addContainerGap())
         );
 
         pack();
@@ -399,24 +395,23 @@ public class FormularioMatriculav2 extends javax.swing.JFrame {
          
     }//GEN-LAST:event_jComboBox1ActionPerformed
 private void limpiarFormulario() {
-        // Limpiar todos los campos
-        jTextField1.setText(""); // Limpiar campo "Nombre"
-        jTextField2.setText(""); // Limpiar campo "Apellidos"
-        jTextField3.setText(""); // Limpiar campo "NIF"
-        jTextField4.setText(""); // Limpiar campo "Dirección"
-        jTextField5.setText(""); // Limpiar campo "Teléfono"
-        jTextField6.setText(""); // Limpiar campo "Email"
-        jFormattedTextField1.setText(""); // Limpiar el campo "C.P"
-        jComboBox1.setSelectedIndex(0); // Reiniciar selección de "Ciclo"
-        jComboBox2.setSelectedIndex(0); // Reiniciar selección de "Turno"
-        jSpinner1.setValue(1); // Reiniciar día a 1
-        jSpinner2.setValue(1); // Reiniciar mes a 1
-        jSpinner3.setValue(1924); // Reiniciar año al valor mínimo
-        jCheckBox1.setSelected(false); // Desmarcar "Ajedrez"
-        jCheckBox2.setSelected(false); // Desmarcar "Futbol Sala"
-        jCheckBox3.setSelected(false); // Desmarcar "Baloncesto"
-
-        // Reiniciar los bordes
+        
+        jTextField1.setText(""); 
+        jTextField2.setText(""); 
+        jTextField3.setText(""); 
+        jTextField4.setText(""); 
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jFormattedTextField1.setText(""); 
+        jComboBox1.setSelectedIndex(0);
+        jComboBox2.setSelectedIndex(0); 
+        jSpinner1.setValue(1);
+        jSpinner2.setValue(1);
+        jSpinner3.setValue(1924); 
+        jCheckBox1.setSelected(false); 
+        jCheckBox2.setSelected(false);
+        jCheckBox3.setSelected(false); 
+       
         Border defaultBorder = jTextField1.getBorder();
         jTextField1.setBorder(defaultBorder);
         jTextField2.setBorder(defaultBorder);
@@ -433,11 +428,11 @@ limpiarFormulario();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        boolean valid = true; // Para verificar si el formulario es válido
-        Border defaultBorder = jTextField1.getBorder(); // Obtener el borde por defecto para restablecerlo después
-        Border redBorder = BorderFactory.createLineBorder(Color.RED, 2); // Crear un borde rojo
+        boolean valid = true; 
+        Border defaultBorder = jTextField1.getBorder(); 
+        Border redBorder = BorderFactory.createLineBorder(Color.RED, 2); 
 
-        // Reiniciar todos los bordes a su estado original antes de la validación
+       
         jTextField1.setBorder(defaultBorder);
         jTextField2.setBorder(defaultBorder);
         jTextField3.setBorder(defaultBorder);
@@ -446,60 +441,58 @@ limpiarFormulario();
         jTextField6.setBorder(defaultBorder);
         jFormattedTextField1.setBorder(defaultBorder);
 
-        // Validar los campos
+       
         if (jTextField1.getText().trim().isEmpty()) {
             jTextField1.setBorder(redBorder);
-            jTextField1.requestFocus(); // Poner el foco en el campo de nombre
+            jTextField1.requestFocus();
             valid = false;
         } else if (jTextField2.getText().trim().isEmpty()) {
             jTextField2.setBorder(redBorder);
-            jTextField2.requestFocus(); // Poner el foco en el campo de apellidos
+            jTextField2.requestFocus(); 
             valid = false;
         } else if (jTextField3.getText().trim().isEmpty()) {
             jTextField3.setBorder(redBorder);
-            jTextField3.requestFocus(); // Poner el foco en el campo de NIF
+            jTextField3.requestFocus();
             valid = false;
         } else if (jTextField4.getText().trim().isEmpty()) {
             jTextField4.setBorder(redBorder);
-            jTextField4.requestFocus(); // Poner el foco en el campo de dirección
+            jTextField4.requestFocus(); 
             valid = false;
         } else if (jFormattedTextField1.getText().trim().isEmpty()) {
             jFormattedTextField1.setBorder(redBorder);
-            jFormattedTextField1.requestFocus(); // Poner el foco en el campo de C.P
+            jFormattedTextField1.requestFocus(); 
             valid = false;
         } else if (jTextField5.getText().trim().isEmpty()) {
             jTextField5.setBorder(redBorder);
-            jTextField5.requestFocus(); // Poner el foco en el campo de teléfono
+            jTextField5.requestFocus();
             valid = false;
         } else if (jTextField6.getText().trim().isEmpty()) {
             jTextField6.setBorder(redBorder);
-            jTextField6.requestFocus(); // Poner el foco en el campo de email
+            jTextField6.requestFocus(); 
             valid = false;
         } else if (jComboBox1.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Selecciona un ciclo formativo.", "Ciclo obligatorio", JOptionPane.WARNING_MESSAGE);
-            jComboBox1.requestFocus(); // Poner el foco en el ciclo
+            jComboBox1.requestFocus();
             valid = false;
         } else if (jComboBox2.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Selecciona un turno.", "Turno obligatorio", JOptionPane.WARNING_MESSAGE);
-            jComboBox2.requestFocus(); // Poner el foco en el turno
+            jComboBox2.requestFocus();
             valid = false;
         }
 
-        // Si todo está bien, abrir JFileChooser para que el usuario guarde el archivo
         if (valid) {
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Guardar formulario"); // Título del diálogo
+            fileChooser.setDialogTitle("Guardar formulario"); 
             int userSelection = fileChooser.showSaveDialog(this);
 
-            // Si el usuario selecciona "Guardar"
+           
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 File archivoSeleccionado = fileChooser.getSelectedFile();
-                // Añadir la extensión .txt si no está presente
+             
                 if (!archivoSeleccionado.getName().toLowerCase().endsWith(".txt")) {
                     archivoSeleccionado = new File(archivoSeleccionado.getAbsolutePath() + ".txt");
                 }
 
-                // Guardar los datos en el archivo
                 try (FileWriter escritor = new FileWriter(archivoSeleccionado)) {
                     escritor.write("Nombre: " + jTextField1.getText() + "\n");
                     escritor.write("Apellidos: " + jTextField2.getText() + "\n");
@@ -516,7 +509,7 @@ limpiarFormulario();
                             (jCheckBox3.isSelected() ? "Baloncesto" : "") + "\n");
 
                     JOptionPane.showMessageDialog(this, "Formulario guardado correctamente en " + archivoSeleccionado.getAbsolutePath(), "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    limpiarFormulario(); // Limpiar el formulario después de guardar
+                    limpiarFormulario(); 
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(this, "Error al guardar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -570,7 +563,22 @@ limpiarFormulario();
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    /**
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+            int option = JOptionPane.showConfirmDialog(
+            this,
+            "¿Deseas guardar los datos antes de cerrar?",
+            "Confirmar cierre",
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+    );
+            
+            if (option == JOptionPane.YES_OPTION) {
+                jButton1ActionPerformed(null);
+                
+            }
+    }//GEN-LAST:event_formWindowClosing
+
+    /**.
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -582,16 +590,13 @@ limpiarFormulario();
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
+        java.awt.EventQueue.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel( new FlatDarkLaf() );
             } catch( UnsupportedLookAndFeelException ex ) {
-            System.err.println( "Failed to initialize LaF" );
-        }
-                new FormularioMatriculav2().setVisible(true);
+                System.err.println( "Failed to initialize LaF" );
             }
+            new FormularioMatriculav2().setVisible(true);
         });
     }
 
