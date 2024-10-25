@@ -11,6 +11,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -34,12 +36,15 @@ public class BlocDeNotas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItemNuevo = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemCerrarPestaña = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -53,13 +58,25 @@ public class BlocDeNotas extends javax.swing.JFrame {
             }
         });
 
+        jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jTabbedPane1.addTab("tab1", jScrollPane1);
+
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jMenu1.setText("Archivo");
+
+        jMenuItemNuevo.setText("Nuevo");
+        jMenuItemNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNuevoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemNuevo);
 
         jMenuItem1.setText("Abrir");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +93,14 @@ public class BlocDeNotas extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jMenuItemCerrarPestaña.setText("Cerrar Pestaña");
+        jMenuItemCerrarPestaña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCerrarPestañaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemCerrarPestaña);
 
         jMenuBar1.add(jMenu1);
 
@@ -120,14 +145,14 @@ public class BlocDeNotas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -135,15 +160,19 @@ public class BlocDeNotas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-
-    JFileChooser fileChooser = new JFileChooser();
+JFileChooser fileChooser = new JFileChooser();
     int option = fileChooser.showOpenDialog(this);
 
     if (option == JFileChooser.APPROVE_OPTION) {
         File archivo = fileChooser.getSelectedFile();
         
         try (FileReader reader = new FileReader(archivo)) {
-            jTextArea1.read(reader, null);  
+            JTextArea textArea = new JTextArea();
+            textArea.read(reader, null);  // Leer el archivo en el JTextArea
+
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            jTabbedPane1.addTab(archivo.getName(), scrollPane);  // Añadir nueva pestaña con el contenido del archivo
+            jTabbedPane1.setSelectedComponent(scrollPane);  // Establecer la nueva pestaña como la activa
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error al abrir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -151,7 +180,11 @@ public class BlocDeNotas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
+   
+    JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
+    JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
+
+    JFileChooser fileChooser = new JFileChooser();
     int option = fileChooser.showSaveDialog(this);
 
     if (option == JFileChooser.APPROVE_OPTION) {
@@ -162,8 +195,12 @@ public class BlocDeNotas extends javax.swing.JFrame {
         }
 
         try (FileWriter writer = new FileWriter(archivo)) {
-            jTextArea1.write(writer);  
+            textArea.write(writer); 
             JOptionPane.showMessageDialog(this, "Archivo guardado con éxito", "Guardado", JOptionPane.INFORMATION_MESSAGE);
+
+           
+            int selectedTabIndex = jTabbedPane1.getSelectedIndex();
+            jTabbedPane1.setTitleAt(selectedTabIndex, archivo.getName());
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error al guardar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -171,18 +208,28 @@ public class BlocDeNotas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el texto", jTextArea1.getForeground());
+         Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el texto", jTextArea1.getForeground());
+
+    if (nuevoColor != null) {
+        // Obtener la pestaña activa y su JTextArea
+        JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
+        JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
         
-        if (nuevoColor != null) {
-        jTextArea1.setForeground(nuevoColor);  // Cambiar el color del texto
+        // Cambiar el color del texto del JTextArea de la pestaña seleccionada
+        textArea.setForeground(nuevoColor);
     }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el fondo", jTextArea1.getBackground());
+   Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el fondo", jTextArea1.getBackground());
+
+    if (nuevoColor != null) {
+        // Obtener la pestaña activa y su JTextArea
+        JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
+        JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
         
-        if (nuevoColor != null) {
-        jTextArea1.setBackground(nuevoColor);  // Cambiar el color de fondo
+        // Cambiar el color de fondo del JTextArea de la pestaña seleccionada
+        textArea.setBackground(nuevoColor);
     }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -192,19 +239,38 @@ public class BlocDeNotas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-         int option = JOptionPane.showConfirmDialog(
-            this,
-            "¿Deseas guardar los datos antes de cerrar?",
-            "Confirmar cierre",
-            JOptionPane.YES_NO_CANCEL_OPTION,
-            JOptionPane.QUESTION_MESSAGE
-    );
-            
-            if (option == JOptionPane.YES_OPTION) {
-                jMenuItem2ActionPerformed(null);
-                
-            }
+    int option = JOptionPane.showConfirmDialog(this, "¿Deseas guardar los datos antes de cerrar?", "Confirmar cierre", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+    if (option == JOptionPane.YES_OPTION) {
+        jMenuItem2ActionPerformed(null);  
+        this.dispose();  
+    } else if (option == JOptionPane.NO_OPTION) {
+        this.dispose(); 
+    }
     }//GEN-LAST:event_formWindowClosing
+
+    private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
+        JTextArea textArea = new JTextArea();
+    JScrollPane scrollPane = new JScrollPane(textArea);
+    
+    jTabbedPane1.addTab("Nuevo Documento", scrollPane);
+    
+    jTabbedPane1.setSelectedComponent(scrollPane);
+    }//GEN-LAST:event_jMenuItemNuevoActionPerformed
+
+    private void jMenuItemCerrarPestañaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrarPestañaActionPerformed
+         int selectedTab = jTabbedPane1.getSelectedIndex();  
+    if (selectedTab != -1) {
+        int option = JOptionPane.showConfirmDialog(this, "¿Deseas guardar los cambios antes de cerrar la pestaña?", "Confirmar cierre de pestaña", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (option == JOptionPane.YES_OPTION) {
+            jMenuItem2ActionPerformed(null);  
+            jTabbedPane1.remove(selectedTab);  
+        } else if (option == JOptionPane.NO_OPTION) {
+            jTabbedPane1.remove(selectedTab);  
+        }
+    }
+    }//GEN-LAST:event_jMenuItemCerrarPestañaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,7 +317,10 @@ public class BlocDeNotas extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItemCerrarPestaña;
+    private javax.swing.JMenuItem jMenuItemNuevo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
