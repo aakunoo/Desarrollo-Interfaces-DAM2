@@ -4,6 +4,7 @@
  */
 package u2Ejercicios;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileReader;
@@ -13,6 +14,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -211,11 +214,9 @@ JFileChooser fileChooser = new JFileChooser();
          Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el texto", jTextArea1.getForeground());
 
     if (nuevoColor != null) {
-        // Obtener la pestaña activa y su JTextArea
         JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
         JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
         
-        // Cambiar el color del texto del JTextArea de la pestaña seleccionada
         textArea.setForeground(nuevoColor);
     }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -224,11 +225,9 @@ JFileChooser fileChooser = new JFileChooser();
    Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el fondo", jTextArea1.getBackground());
 
     if (nuevoColor != null) {
-        // Obtener la pestaña activa y su JTextArea
         JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
         JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
         
-        // Cambiar el color de fondo del JTextArea de la pestaña seleccionada
         textArea.setBackground(nuevoColor);
     }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
@@ -302,6 +301,11 @@ JFileChooser fileChooser = new JFileChooser();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                UIManager.setLookAndFeel( new FlatDarkLaf() );
+            } catch( UnsupportedLookAndFeelException ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }
                 new BlocDeNotas().setVisible(true);
             }
         });
