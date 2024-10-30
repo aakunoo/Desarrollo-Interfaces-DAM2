@@ -5,6 +5,8 @@
 package u2Ejercicios;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -91,14 +93,20 @@ public class RefuerzoCuadrosDialogo extends javax.swing.JFrame {
         });
     }
     private static void jugarAdivinarNumero() {
-        Random rd = new Random();
-        int numeroAdivinar = rd.nextInt(10) + 1;
+                Random random = new Random();
+        int numeroAdivinar = random.nextInt(10) + 1;
+        List<Integer> opciones = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            opciones.add(i);
+        }
 
-        boolean boo = false;
-        while (!boo) {
-            String respuestaStr = JOptionPane.showInputDialog(null, "Adivina el número (1-10):", "Adivina el número", JOptionPane.QUESTION_MESSAGE);
-            if (respuestaStr == null) {
-                int salir = JOptionPane.showConfirmDialog(null, "¿Quieres salir del juego?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        boolean adivinado = false;
+        while (!adivinado) {
+            Integer[] opcionesArray = opciones.toArray(new Integer[0]);
+            Integer respuesta = (Integer) JOptionPane.showInputDialog(null, "Adivina el número:", "Adivina el número", JOptionPane.QUESTION_MESSAGE, null, opcionesArray, opcionesArray[0]);
+            
+            if (respuesta == null) {
+                int salir = JOptionPane.showConfirmDialog(null, "¿Quieres salir del juego?", "Cagao", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (salir == JOptionPane.YES_OPTION) {
                     break;
                 } else {
@@ -106,27 +114,28 @@ public class RefuerzoCuadrosDialogo extends javax.swing.JFrame {
                 }
             }
 
-            try {
-                int respuesta = Integer.parseInt(respuestaStr);
-                if (respuesta < 1 && respuesta > 10) {
-                    JOptionPane.showMessageDialog(null, "Por favor, introduce un número entre 1 y 10.", "Vaya tela", JOptionPane.WARNING_MESSAGE);
-                } else if (respuesta < numeroAdivinar) {
-                    JOptionPane.showMessageDialog(null, "El número es mayor.", "Tontin", JOptionPane.INFORMATION_MESSAGE);
-                } else if (respuesta > numeroAdivinar) {
-                    JOptionPane.showMessageDialog(null, "El número es menor.", "Tontin", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null, "¡Felicidades! Has adivinado el número.", "Grande genio", JOptionPane.INFORMATION_MESSAGE);
-                    int jugarDeNuevo = JOptionPane.showConfirmDialog(null, "¿Quieres volver a jugar?", "Échale huevos", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                    if (jugarDeNuevo == JOptionPane.YES_OPTION) {
-                        numeroAdivinar = rd.nextInt(10) + 1;
-                    } else {
-                        boo = true;
+if (respuesta < 1 || respuesta > 10) {
+                JOptionPane.showMessageDialog(null, "Por favor, introduce un número entre 1 y 10.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else if (respuesta < numeroAdivinar) {
+                JOptionPane.showMessageDialog(null, "El número es mayor.", "Tontin", JOptionPane.INFORMATION_MESSAGE);
+                opciones.removeIf(num -> num <= respuesta);
+            } else if (respuesta > numeroAdivinar) {
+                JOptionPane.showMessageDialog(null, "El número es menor.", "Tontin", JOptionPane.INFORMATION_MESSAGE);
+                opciones.removeIf(num -> num >= respuesta);
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Felicidades! Has adivinado el número.", "Buena crack", JOptionPane.INFORMATION_MESSAGE);
+                int jugarDeNuevo = JOptionPane.showConfirmDialog(null, "¿Quieres jugar de nuevo?", "Dale sin miedo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (jugarDeNuevo == JOptionPane.YES_OPTION) {
+                    numeroAdivinar = random.nextInt(10) + 1;
+                    opciones.clear();
+                    for (int i = 1; i <= 10; i++) {
+                        opciones.add(i);
                     }
+                } else {
+                    adivinado = true;
                 }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Entrada inválida. Por favor, introduce un número.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
         }
+    }
     }
 }
 
