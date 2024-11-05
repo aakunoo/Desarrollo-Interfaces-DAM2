@@ -42,6 +42,15 @@ public class BlocDeNotas extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jToolBar1 = new javax.swing.JToolBar();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemNuevo = new javax.swing.JMenuItem();
@@ -69,10 +78,82 @@ public class BlocDeNotas extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab1", jScrollPane1);
 
+        jToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jToolBar1.setRollover(true);
+
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\hojaenblanco(1).png")); // NOI18N
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
+
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\abrirarchivo(2).png")); // NOI18N
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton2);
+
+        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\guardar(1).png")); // NOI18N
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton3);
+        jToolBar1.add(jSeparator1);
+
+        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\colortexto(1).png")); // NOI18N
+        jButton5.setFocusable(false);
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton5);
+
+        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\colorfondo(1).png")); // NOI18N
+        jButton6.setFocusable(false);
+        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton6);
+        jToolBar1.add(jSeparator2);
+
+        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\ayuda(1).png")); // NOI18N
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton4);
+
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jMenu1.setText("Archivo");
 
+        jMenuItemNuevo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\hojaenblanco(1).png")); // NOI18N
         jMenuItemNuevo.setText("Nuevo");
         jMenuItemNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +162,7 @@ public class BlocDeNotas extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemNuevo);
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\abrirarchivo(2).png")); // NOI18N
         jMenuItem1.setText("Abrir");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +171,7 @@ public class BlocDeNotas extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\guardar(1).png")); // NOI18N
         jMenuItem2.setText("Guardar");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +192,7 @@ public class BlocDeNotas extends javax.swing.JFrame {
 
         jMenu2.setText("Vista");
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\colortexto(1).png")); // NOI18N
         jMenuItem3.setText("Color de texto");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +201,7 @@ public class BlocDeNotas extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\colorfondo(1).png")); // NOI18N
         jMenuItem5.setText("Color de fondo");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +214,7 @@ public class BlocDeNotas extends javax.swing.JFrame {
 
         jMenu3.setText("Ayuda");
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\ayuda(1).png")); // NOI18N
         jMenuItem4.setText("Acerca de");
         jMenuItem4.setToolTipText("");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -146,16 +232,20 @@ public class BlocDeNotas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -271,6 +361,90 @@ JFileChooser fileChooser = new JFileChooser();
     }
     }//GEN-LAST:event_jMenuItemCerrarPestañaActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JTextArea textArea = new JTextArea();
+    JScrollPane scrollPane = new JScrollPane(textArea);
+    
+    jTabbedPane1.addTab("Nuevo Documento", scrollPane);
+    
+    jTabbedPane1.setSelectedComponent(scrollPane);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+    int option = fileChooser.showOpenDialog(this);
+
+    if (option == JFileChooser.APPROVE_OPTION) {
+        File archivo = fileChooser.getSelectedFile();
+        
+        try (FileReader reader = new FileReader(archivo)) {
+            JTextArea textArea = new JTextArea();
+            textArea.read(reader, null);  // Leer el archivo en el JTextArea
+
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            jTabbedPane1.addTab(archivo.getName(), scrollPane);  // Añadir nueva pestaña con el contenido del archivo
+            jTabbedPane1.setSelectedComponent(scrollPane);  // Establecer la nueva pestaña como la activa
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al abrir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+          
+    JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
+    JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
+
+    JFileChooser fileChooser = new JFileChooser();
+    int option = fileChooser.showSaveDialog(this);
+
+    if (option == JFileChooser.APPROVE_OPTION) {
+        File archivo = fileChooser.getSelectedFile();
+
+        if (!archivo.getName().toLowerCase().endsWith(".txt")) {
+            archivo = new File(archivo.getAbsolutePath() + ".txt");
+        }
+
+        try (FileWriter writer = new FileWriter(archivo)) {
+            textArea.write(writer); 
+            JOptionPane.showMessageDialog(this, "Archivo guardado con éxito", "Guardado", JOptionPane.INFORMATION_MESSAGE);
+
+           
+            int selectedTabIndex = jTabbedPane1.getSelectedIndex();
+            jTabbedPane1.setTitleAt(selectedTabIndex, archivo.getName());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+                JOptionPane.showMessageDialog(this, 
+        "Aplicación Bloc de Notas\n" + "Desarrollado por: Jerónimo\n" + "Versión: 1.0\n" + "Fecha: 24/10/2024", "Información de autoría", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+                Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el texto", jTextArea1.getForeground());
+
+    if (nuevoColor != null) {
+        JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
+        JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
+        
+        textArea.setForeground(nuevoColor);
+    }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el fondo", jTextArea1.getBackground());
+
+    if (nuevoColor != null) {
+        JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
+        JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
+        
+        textArea.setBackground(nuevoColor);
+    }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -312,6 +486,12 @@ JFileChooser fileChooser = new JFileChooser();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -324,7 +504,10 @@ JFileChooser fileChooser = new JFileChooser();
     private javax.swing.JMenuItem jMenuItemCerrarPestaña;
     private javax.swing.JMenuItem jMenuItemNuevo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
