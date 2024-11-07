@@ -1078,9 +1078,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu3MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+        String nombre = jTextField16.getText();
+        String dni = jTextField19.getText();
+        String direccion = jTextField17.getText();
+        String telefono = jTextField18.getText();
+        String posicion = obtenerPosicionSeleccionada();
+        String sueldo = jTextField20.getText();
+        String fechaNacimiento = jFormattedTextField2.getText();
+        String ppp = jFormattedTextField3.getText();
+        String ppg = jFormattedTextField4.getText();
+        String numeroGoles = jTextField21.getText();
+
+        String jugadorInfo = String.format("Nombre: %s, DNI: %s, Dirección: %s, Teléfono: %s, Posición: %s, Sueldo: %s, Fecha de Nacimiento: %s, P/P/P: %s, P/P/G: %s, Número de Goles: %s",
+                nombre, dni, direccion, telefono, posicion, sueldo, fechaNacimiento, ppp, ppg, numeroGoles);
+
+        jTextArea4.append(jugadorInfo + "\n");
+        
+           
     }//GEN-LAST:event_jButton1ActionPerformed
 
+     private String obtenerPosicionSeleccionada() {
+        if (jRadioButton4.isSelected()) {
+            return "Portero";
+        } else if (jRadioButton5.isSelected()) {
+            return "Defensa";
+        } else if (jRadioButton6.isSelected()) {
+            return "Delantero";
+        }
+        return "";
+     }
+    
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
