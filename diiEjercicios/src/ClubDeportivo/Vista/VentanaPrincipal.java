@@ -5,9 +5,15 @@
 package ClubDeportivo.Vista;
 
 
-import ClubDeportivo.Modelo.*;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.*;
-import java.util.ArrayList;
+
 
 /**
  *
@@ -20,6 +26,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+       
     }
 
     /**
@@ -992,7 +999,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setText("Vaciar Listta");
+        jMenuItem3.setText("Vaciar Lista");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -1074,16 +1081,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton6ActionPerformed
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-        // TODO add your handling code here:
+     
+      
+      int salir = JOptionPane.showConfirmDialog(
+            this,
+            "¿Seguro que quieres salir?",
+            "Confirmar",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+
+    if (salir == JOptionPane.YES_OPTION) {
+        System.exit(0);
+    }
+
     }//GEN-LAST:event_jMenu3MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         String nombre = jTextField16.getText();
         String dni = jTextField19.getText();
         String direccion = jTextField17.getText();
         String telefono = jTextField18.getText();
-        String posicion = obtenerPosicionSeleccionada();
+        String posicion;
+        if (jRadioButton4.isSelected()) {
+            posicion = "Portero";
+        } else if (jRadioButton5.isSelected()) {
+            posicion = "Defensa";
+        } else if (jRadioButton6.isSelected()) {
+            posicion = "Delantero";
+        } else {
+            posicion = "";
+        }
         String sueldo = jTextField20.getText();
         String fechaNacimiento = jFormattedTextField2.getText();
         String ppp = jFormattedTextField3.getText();
@@ -1094,31 +1121,333 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 nombre, dni, direccion, telefono, posicion, sueldo, fechaNacimiento, ppp, ppg, numeroGoles);
 
         jTextArea4.append(jugadorInfo + "\n");
-        
-           
     }//GEN-LAST:event_jButton1ActionPerformed
 
-     private String obtenerPosicionSeleccionada() {
-        if (jRadioButton4.isSelected()) {
-            return "Portero";
-        } else if (jRadioButton5.isSelected()) {
-            return "Defensa";
-        } else if (jRadioButton6.isSelected()) {
-            return "Delantero";
-        }
-        return "";
-     }
-    
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+    int indexseleccionao = jTabbedPane1.getSelectedIndex();
+
+    switch (indexseleccionao) {
+        case 0:
+            
+            if (jTextField19.getText().trim().isEmpty()) {
+                jTextField19.setBackground(java.awt.Color.RED);
+                jTextField19.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Nombre'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField16.getText().trim().isEmpty()) {
+                jTextField16.setBackground(java.awt.Color.RED);
+                jTextField16.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'DNI'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField17.getText().trim().isEmpty()) {
+                jTextField17.setBackground(java.awt.Color.RED);
+                jTextField17.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Dirección'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField18.getText().trim().isEmpty()) {
+                jTextField18.setBackground(java.awt.Color.RED);
+                jTextField18.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Teléfono'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (!jRadioButton4.isSelected() && !jRadioButton5.isSelected() && !jRadioButton6.isSelected()) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar una 'Posición'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField20.getText().trim().isEmpty()) {
+                jTextField20.setBackground(java.awt.Color.RED);
+                jTextField20.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Sueldo'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jFormattedTextField2.getText().trim().isEmpty()) {
+                jFormattedTextField2.setBackground(java.awt.Color.RED);
+                jFormattedTextField2.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Fecha de Nacimiento'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField21.getText().trim().isEmpty()) {
+                jTextField21.setBackground(java.awt.Color.RED);
+                jTextField21.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Número de Goles'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String nombreJugador = jTextField19.getText();
+            String dniJugador = jTextField16.getText();
+            String direccionJugador = jTextField17.getText();
+            String telefonoJugador = jTextField18.getText();
+            String posicionJugador;
+            if (jRadioButton4.isSelected()) {
+                posicionJugador = "Portero";
+            } else if (jRadioButton5.isSelected()) {
+                posicionJugador = "Defensa";
+            } else {
+                posicionJugador = "Delantero";
+            }
+            String sueldoJugador = jTextField20.getText();
+            String fechaNacimientoJugador = jFormattedTextField2.getText();
+            String pppJugador = jFormattedTextField3.getText();
+            String ppgJugador = jFormattedTextField4.getText();
+            String numeroGoles = jTextField21.getText();
+
+            String jugadorInfo = String.format("Nombre: %s, DNI: %s, Dirección: %s, Teléfono: %s, Posición: %s, Sueldo: %s, Fecha de Nacimiento: %s, P/P/P: %s, P/P/G: %s, Número de Goles: %s",
+                    nombreJugador, dniJugador, direccionJugador, telefonoJugador, posicionJugador, sueldoJugador, fechaNacimientoJugador, pppJugador, ppgJugador, numeroGoles);
+
+            jTextArea4.append(jugadorInfo + "\n");
+            break;
+
+        case 1:
+            
+            if (jTextField14.getText().trim().isEmpty()) {
+                jTextField14.setBackground(java.awt.Color.RED);
+                jTextField14.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Nombre'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField11.getText().trim().isEmpty()) {
+                jTextField11.setBackground(java.awt.Color.RED);
+                jTextField11.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'DNI'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField12.getText().trim().isEmpty()) {
+                jTextField12.setBackground(java.awt.Color.RED);
+                jTextField12.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Dirección'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField13.getText().trim().isEmpty()) {
+                jTextField13.setBackground(java.awt.Color.RED);
+                jTextField13.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Teléfono'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField15.getText().trim().isEmpty()) {
+                jTextField15.setBackground(java.awt.Color.RED);
+                jTextField15.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Sueldo'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String nombreEntrenador = jTextField14.getText();
+            String dniEntrenador = jTextField11.getText();
+            String direccionEntrenador = jTextField12.getText();
+            String telefonoEntrenador = jTextField13.getText();
+            String sueldoEntrenador = jTextField15.getText();
+            String pppEntrenador = jFormattedTextField1.getText();
+
+            String entrenadorInfo = String.format("Nombre: %s, DNI: %s, Dirección: %s, Teléfono: %s, Sueldo: %s, P/P/P: %s",
+                    nombreEntrenador, dniEntrenador, direccionEntrenador, telefonoEntrenador, sueldoEntrenador, pppEntrenador);
+
+            jTextArea3.append(entrenadorInfo + "\n");
+            break;
+
+        case 2:
+            
+            if (jTextField9.getText().trim().isEmpty()) {
+                jTextField9.setBackground(java.awt.Color.RED);
+                jTextField9.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Nombre'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField6.getText().trim().isEmpty()) {
+                jTextField6.setBackground(java.awt.Color.RED);
+                jTextField6.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'DNI'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField7.getText().trim().isEmpty()) {
+                jTextField7.setBackground(java.awt.Color.RED);
+                jTextField7.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Dirección'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField8.getText().trim().isEmpty()) {
+                jTextField8.setBackground(java.awt.Color.RED);
+                jTextField8.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Teléfono'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField10.getText().trim().isEmpty()) {
+                jTextField10.setBackground(java.awt.Color.RED);
+                jTextField10.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Sueldo'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String nombreMantenedor = jTextField9.getText();
+            String dniMantenedor = jTextField6.getText();
+            String direccionMantenedor = jTextField7.getText();
+            String telefonoMantenedor = jTextField8.getText();
+            String fijoMantenedor = (String) jComboBox1.getSelectedItem();
+            String sueldoMantenedor = jTextField10.getText();
+
+            String mantenedorInfo = String.format("Nombre: %s, DNI: %s, Dirección: %s, Teléfono: %s, Fijo: %s, Sueldo: %s",
+                    nombreMantenedor, dniMantenedor, direccionMantenedor, telefonoMantenedor, fijoMantenedor, sueldoMantenedor);
+
+            jTextArea2.append(mantenedorInfo + "\n");
+            break;
+
+        case 3:
+          
+            if (jTextField4.getText().trim().isEmpty()) {
+                jTextField4.setBackground(java.awt.Color.RED);
+                jTextField4.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Nombre'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField1.getText().trim().isEmpty()) {
+                jTextField1.setBackground(java.awt.Color.RED);
+                jTextField1.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'DNI'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField2.getText().trim().isEmpty()) {
+                jTextField2.setBackground(java.awt.Color.RED);
+                jTextField2.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Dirección'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField3.getText().trim().isEmpty()) {
+                jTextField3.setBackground(java.awt.Color.RED);
+                jTextField3.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Teléfono'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (jTextField5.getText().trim().isEmpty()) {
+                jTextField5.setBackground(java.awt.Color.RED);
+                jTextField5.requestFocus();
+                JOptionPane.showMessageDialog(this, "Por favor, complete el campo 'Sueldo'", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String nombreDirectivo = jTextField4.getText();
+            String dniDirectivo = jTextField1.getText();
+            String direccionDirectivo = jTextField2.getText();
+            String telefonoDirectivo = jTextField3.getText();
+            String cargoDirectivo;
+            if (jRadioButton1.isSelected()) {
+                cargoDirectivo = "Presidente";
+            } else if (jRadioButton2.isSelected()) {
+                cargoDirectivo = "Delegado";
+            } else {
+                cargoDirectivo = "Secretario";
+            }
+            String sueldoDirectivo = jTextField5.getText();
+            boolean activoDirectivo = jCheckBox1.isSelected();
+
+            String directivoInfo = String.format("Nombre: %s, DNI: %s, Dirección: %s, Teléfono: %s, Cargo: %s, Sueldo: %s, Activo: %s",
+                    nombreDirectivo, dniDirectivo, direccionDirectivo, telefonoDirectivo, cargoDirectivo, sueldoDirectivo, activoDirectivo ? "Sí" : "No");
+
+            jTextArea1.append(directivoInfo + "\n");
+            break;
+
+        default:
+            JOptionPane.showMessageDialog(this, "Seleccione una pestaña válida", "Error", JOptionPane.ERROR_MESSAGE);
+            break;
+    }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+     int selectedIndex = jTabbedPane1.getSelectedIndex();
+     
+      JTextArea textAreaActual = null;
+        switch (selectedIndex) {
+        case 0:
+           
+            textAreaActual = jTextArea4;
+            break;
+        case 1:
+         
+            textAreaActual = jTextArea3;
+            break;
+        case 2:
+           
+            textAreaActual = jTextArea2;
+            break;
+        case 3:
+            
+            textAreaActual = jTextArea1;
+            break;
+        default:
+            JOptionPane.showMessageDialog(this, "No hay una pestaña válida seleccionada", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+            
+    }
+        
+          if (textAreaActual != null) {
+        String text = textAreaActual.getText();
+        if (!text.isEmpty()) {
+            int lastIndex = text.lastIndexOf("\n", text.length() - 2);
+            if (lastIndex >= 0) {
+                text = text.substring(0, lastIndex + 1);
+            } else {
+                text = "";
+            }
+            textAreaActual.setText(text);
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay texto para eliminar.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+   int selectedIndex = jTabbedPane1.getSelectedIndex();
+
+    switch (selectedIndex) {
+        case 0:
+            // jugadores
+            jTextField16.setText("");
+            jTextField17.setText("");
+            jTextField18.setText("");
+            jTextField19.setText("");
+            jTextField20.setText("");
+            jFormattedTextField2.setText("");
+            jFormattedTextField3.setText("");
+            jFormattedTextField4.setText("");
+            jTextField21.setText("");
+            buttonGroup1.clearSelection();
+            break;
+
+        case 1:
+            // entrenadores
+            jTextField14.setText("");
+            jTextField11.setText("");
+            jTextField12.setText("");
+            jTextField13.setText("");
+            jTextField15.setText("");
+            jFormattedTextField1.setText("");
+            break;
+
+        case 2:
+            // mantenedores
+            jTextField9.setText("");
+            jTextField6.setText("");
+            jTextField7.setText("");
+            jTextField8.setText("");
+            jTextField10.setText("");
+            jComboBox1.setSelectedIndex(0);
+            break;
+
+        case 3:
+            // directivos
+            jTextField4.setText("");
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField5.setText("");
+            buttonGroup1.clearSelection();  
+            jCheckBox1.setSelected(false);
+            break;
+
+        default:
+            JOptionPane.showMessageDialog(this, "Seleccione una pestaña válida", "Error", JOptionPane.ERROR_MESSAGE);
+            break;
+    };
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -1126,15 +1455,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+         JFileChooser fileChooser = new JFileChooser();
+    int result = fileChooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            StringBuilder sb = new StringBuilder();
+            while ((line = br.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            jTextArea4.setText(sb.toString());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
+            JFileChooser fileChooser = new JFileChooser();
+    int resultao = fileChooser.showSaveDialog(this);
+    if (resultao == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            bw.write("Jugadores:\n" + jTextArea4.getText() + "\n");
+            
+            JOptionPane.showMessageDialog(this, "Archivo exportado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-        // TODO add your handling code here:
+ 
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
@@ -1198,7 +1552,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField13ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
