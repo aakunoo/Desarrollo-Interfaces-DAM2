@@ -4,16 +4,21 @@
  */
 package u3Ejercicios.Arboles;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
 /**
  *
  * @author Manana
  */
 public class Ejercicio2 extends javax.swing.JFrame {
 
+    DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Continentes");
     /**
      * Creates new form Ejercicio2
      */
     public Ejercicio2() {
+        inicializarArbol();
         initComponents();
     }
 
@@ -26,22 +31,92 @@ public class Ejercicio2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree(raiz);
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaInfo = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTree1.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jTree1ValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTree1);
+
+        jTextAreaInfo.setColumns(20);
+        jTextAreaInfo.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaInfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree1ValueChanged
+        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
+        if (selectedNode == null) return;
+
+        Object userObject = selectedNode.getUserObject();
+        if (userObject instanceof Pais) {
+            Pais pais = (Pais) userObject;
+            jTextAreaInfo.setText(pais.obtenerInformacion());
+        } else {
+            jTextAreaInfo.setText("");
+        }
+    }//GEN-LAST:event_jTree1ValueChanged
+    private void inicializarArbol() {
+     
+        raiz = new DefaultMutableTreeNode("Continentes");
+        DefaultMutableTreeNode america = new DefaultMutableTreeNode("América");
+        DefaultMutableTreeNode europa = new DefaultMutableTreeNode("Europa");
+        DefaultMutableTreeNode asia = new DefaultMutableTreeNode("Asia");
+
+        raiz.add(america);
+        raiz.add(europa);
+        raiz.add(asia);
+        
+        Pais argentina = new Pais("Argentina", "Buenos Aires", 45000000, 490000);
+        Pais canada = new Pais("Canadá", "Ottawa", 38000000, 1643000);
+        america.add(new DefaultMutableTreeNode(argentina));
+        america.add(new DefaultMutableTreeNode(canada));
+        
+        Pais espana = new Pais("España", "Madrid", 47000000, 1394000);
+        Pais alemania = new Pais("Alemania", "Berlín", 83000000, 3846000);
+        europa.add(new DefaultMutableTreeNode(espana));
+        europa.add(new DefaultMutableTreeNode(alemania));
+        
+        Pais china = new Pais("China", "Pekín", 1402000000, 14720000);
+        Pais japon = new Pais("Japón", "Tokio", 126000000, 5082000);
+        asia.add(new DefaultMutableTreeNode(china));
+        asia.add(new DefaultMutableTreeNode(japon));
+        
+        
+        
+ }
     /**
      * @param args the command line arguments
      */
@@ -72,11 +147,19 @@ public class Ejercicio2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new Ejercicio2().setVisible(true);
+                
             }
+            
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextAreaInfo;
+    private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
