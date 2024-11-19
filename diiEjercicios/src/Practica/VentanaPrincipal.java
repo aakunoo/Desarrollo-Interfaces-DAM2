@@ -5,6 +5,9 @@
 package Practica;
 
 import Practica.Ropa;
+import java.util.List;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -53,20 +56,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Tienda de Ropa");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Pantalones");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("---");
-        treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Camisetas");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("---");
-        treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Sudaderas");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("---");
-        treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Zapatillas");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("---");
-        treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTree1);
@@ -223,18 +218,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     String codigo = tfCodigo.getText();
     String sexo = cbHombre.isSelected() ? "Hombre" : cbMujer.isSelected() ? "Mujer" : "Sin especificar";
     String categoria = (String) cbCategoria.getSelectedItem();
-    String talla = lista.getSelectedValue();
-    int cantidad = (Integer) spinnerCantidad.getValue();
-    
+    int cantidad = (int) spinnerCantidad.getValue();
+    List<String> talla=lista.getSelectedValuesList();
     Ropa nuevaRopa = new Ropa(talla, sexo, categoria, nombre, codigo, cantidad);
     
-    javax.swing.tree.DefaultTreeModel model = (javax.swing.tree.DefaultTreeModel) jTree1.getModel();
-    javax.swing.tree.DefaultMutableTreeNode root = (javax.swing.tree.DefaultMutableTreeNode) model.getRoot();
+    DefaultTreeModel modelo = (DefaultTreeModel) jTree1.getModel();
+    DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
     
     // Buscar el nodo correspondiente a la categoría seleccionada
-    javax.swing.tree.DefaultMutableTreeNode categoriaNode = null;
-    for (int i = 0; i < root.getChildCount(); i++) {
-        javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) root.getChildAt(i);
+    DefaultMutableTreeNode categoriaNode = null;
+    for (int i = 0; i < raiz.getChildCount(); i++) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) raiz.getChildAt(i);
         if (node.toString().equals(categoria)) {
             categoriaNode = node;
             break;
@@ -243,10 +237,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Si se encontró la categoría, agregar la ropa como un nuevo nodo
     if (categoriaNode != null) {
-        javax.swing.tree.DefaultMutableTreeNode nuevoNodo = new javax.swing.tree.DefaultMutableTreeNode(
+        DefaultMutableTreeNode nuevoNodo = new DefaultMutableTreeNode(
                 String.format("%s (Talla: %s, Sexo: %s, Cantidad: %d)", nombre, talla, sexo, cantidad));
         categoriaNode.add(nuevoNodo);
-        model.reload(categoriaNode);  // Recargar la vista del nodo para actualizar el árbol
+        modelo.reload(categoriaNode);  // Recargar la vista del nodo para actualizar el árbol
     }
 
     // Limpiar los campos del formulario después de guardar

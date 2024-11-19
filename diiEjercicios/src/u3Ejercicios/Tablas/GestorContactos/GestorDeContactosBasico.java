@@ -325,7 +325,7 @@ public class GestorDeContactosBasico extends javax.swing.JFrame {
     }//GEN-LAST:event_tfNombreActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-            String nombre = tfNombre.getText();
+    String nombre = tfNombre.getText();
     String telefono = tfTelef.getText();
     String email = tfEmail.getText();
     String categoria = (String) cbCategoria.getSelectedItem();

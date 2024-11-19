@@ -4,19 +4,21 @@
  */
 package Practica;
 
+import java.util.List;
+
 /**
  *
  * @author Manana
  */
 public class Ropa {
-    private String talla;
+    List<String>talla;
     private String sexo;
     private String categoria;
     private String nommbre;
     private String codigo;
     private int cantidad;
 
-    public Ropa(String talla, String sexo, String categoria, String nommbre, String codigo, int cantidad) {
+    public Ropa(List<String> talla, String sexo, String categoria, String nommbre, String codigo, int cantidad) {
         this.talla = talla;
         this.sexo = sexo;
         this.categoria = categoria;
@@ -25,15 +27,11 @@ public class Ropa {
         this.cantidad = cantidad;
     }
 
-    
-    
-    
-    
-    public String getTalla() {
+    public List<String> getTalla() {
         return talla;
     }
 
-    public void setTalla(String talla) {
+    public void setTalla(List<String> talla) {
         this.talla = talla;
     }
 

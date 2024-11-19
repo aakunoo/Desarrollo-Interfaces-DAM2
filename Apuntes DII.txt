@@ -1,0 +1,151 @@
+Cambiar color fondo:
+
+Color color = JColorChooser.showDialog(this, "Elige un color", getContentPane().getBackground());
+    if (color != null) {
+        getContentPane().setBackground(color);
+        jTable1.setBackground(color);
+        jPanel2.setBackground(color);
+
+Salir:
+
+int respuesta = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas salir?", "Confirmación", JOptionPane.YES_NO_OPTION);
+    if (respuesta == JOptionPane.YES_OPTION) {
+        System.exit(0);
+
+Guardar Tabla en archivo:
+
+JFileChooser fileChooser = new JFileChooser();
+    int selection = fileChooser.showSaveDialog(this);
+    if (selection == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+        try (PrintWriter writer = new PrintWriter(file)) {
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                String nombre = (String) jTable1.getValueAt(i, 0);
+                String telefono = (String) jTable1.getValueAt(i, 1);
+                String email = (String) jTable1.getValueAt(i, 2);
+                String categoria = (String) jTable1.getValueAt(i, 3);
+                writer.println(nombre + "," + telefono + "," + email + "," + categoria);
+            }
+            JOptionPane.showMessageDialog(this, "Lista guardada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error al guardar el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+Agregar campos de formulario a tabla:
+
+    String nombre = tfNombre.getText();
+    String telefono = tfTelef.getText();
+    String email = tfEmail.getText();
+    String categoria = (String) cbCategoria.getSelectedItem();
+
+    if (nombre.isEmpty() || telefono.isEmpty() || email.isEmpty() || categoria.equals("---")) {
+        JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos antes de agregar un contacto.", "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addRow(new Object[]{nombre, telefono, email, categoria});
+
+        // Limpiar los campos después de agregar el contacto
+        tfNombre.setText("");
+        tfTelef.setText("");
+        tfEmail.setText("");
+        cbCategoria.setSelectedIndex(0);
+    }
+
+Menu Ayuda:
+
+           JOptionPane.showMessageDialog(this, 
+            "Gestor de Contactos Básico v1.0\n\n" +
+            "Esta aplicación permite gestionar una lista de contactos,\n" +
+            "incluyendo la posibilidad de agregar, visualizar y eliminar contactos.\n\n" +
+            "Desarrollado por Jerónimo Vicente.", 
+            "Acerca de", JOptionPane.INFORMATION_MESSAGE);
+
+Exportar Archivo:
+
+JFileChooser fileChooser = new JFileChooser();
+    int resultado = fileChooser.showSaveDialog(this);
+    if (resultado == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            bw.write(jTextArea4.getText());
+            
+            JOptionPane.showMessageDialog(this, "Archivo exportado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+Imprimir en TextArea:
+
+TexField|
+	|  getText().trim()
+Textarea|
+
+Spinner --> (Date)getValue()
+
+ComboBox --> getSelectedItem()
+
+Radiobutton|
+	   | isSelected()
+Checkbox   |
+
+String jugadorInfo = String.format(“Info” con @s para lo seleccionado.)
+ jTextArea.append(jugadorInfo + "\n");
+jTextArea.setText
+
+
+Ocultar PANEL
+
+if (jToggleButton1.isSelected()) {
+            jPanel3.setVisible(true); 
+        } else {
+            jPanel3.setVisible(false);
+        }
+
+
+
+
+AGREGAR A ARBOLES
+
+    String nombre = tfNombre.getText();
+    String codigo = tfCodigo.getText();
+    String sexo = cbHombre.isSelected() ? "Hombre" : cbMujer.isSelected() ? "Mujer" : "Sin especificar";
+    String categoria = (String) cbCategoria.getSelectedItem();
+    int cantidad = (int) spinnerCantidad.getValue();
+    List<String> talla=lista.getSelectedValuesList();
+    Ropa nuevaRopa = new Ropa(talla, sexo, categoria, nombre, codigo, cantidad);
+    
+    DefaultTreeModel modelo = (DefaultTreeModel) jTree1.getModel();
+    DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
+    
+    // Buscar el nodo correspondiente a la categoría seleccionada
+    DefaultMutableTreeNode categoriaNode = null;
+    for (int i = 0; i < raiz.getChildCount(); i++) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) raiz.getChildAt(i);
+        if (node.toString().equals(categoria)) {
+            categoriaNode = node;
+            break;
+        }
+    }
+
+    // Si se encontró la categoría, agregar la ropa como un nuevo nodo
+    if (categoriaNode != null) {
+        DefaultMutableTreeNode nuevoNodo = new DefaultMutableTreeNode(
+                String.format("%s (Talla: %s, Sexo: %s, Cantidad: %d)", nombre, talla, sexo, cantidad));
+        categoriaNode.add(nuevoNodo);
+        modelo.reload(categoriaNode);  // Recargar la vista del nodo para actualizar el árbol
+    }
+
+    // Limpiar los campos del formulario después de guardar
+    tfNombre.setText("");
+    tfCodigo.setText("");
+    cbHombre.setSelected(false);
+    cbMujer.setSelected(false);
+    cbCategoria.setSelectedIndex(0);
+    lista.clearSelection();
+    spinnerCantidad.setValue(0);
+
+

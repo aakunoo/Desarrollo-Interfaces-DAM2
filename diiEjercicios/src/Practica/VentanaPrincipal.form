@@ -63,7 +63,7 @@
         <Component class="javax.swing.JTree" name="jTree1">
           <Properties>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="Tienda de Ropa&#xa; Pantalones&#xa;  ---&#xa; Camisetas&#xa;  ---&#xa; Sudaderas&#xa;  ---&#xa; Zapatillas&#xa;  ---"/>
+              <TreeModel code="Tienda de Ropa&#xa; Pantalones&#xa; Camisetas&#xa;&#xa; Sudaderas&#xa; Zapatillas"/>
             </Property>
           </Properties>
         </Component>
