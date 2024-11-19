@@ -8,13 +8,10 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JColorChooser;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -77,7 +74,6 @@ public class GestorDeContactosBasico extends javax.swing.JFrame {
         jToolBar1.setFloatable(true);
         jToolBar1.setRollover(true);
 
-        botonGuardarContacto.setIcon(new javax.swing.ImageIcon("/Users/jeronimovicente/Downloads/disco (1).png")); // NOI18N
         botonGuardarContacto.setFocusable(false);
         botonGuardarContacto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonGuardarContacto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -88,7 +84,6 @@ public class GestorDeContactosBasico extends javax.swing.JFrame {
         });
         jToolBar1.add(botonGuardarContacto);
 
-        botonAgregarContacto.setIcon(new javax.swing.ImageIcon("/Users/jeronimovicente/Downloads/iloveimg-resized/sumar icono.png")); // NOI18N
         botonAgregarContacto.setFocusable(false);
         botonAgregarContacto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonAgregarContacto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -99,7 +94,6 @@ public class GestorDeContactosBasico extends javax.swing.JFrame {
         });
         jToolBar1.add(botonAgregarContacto);
 
-        botonEliminarContacto.setIcon(new javax.swing.ImageIcon("/Users/jeronimovicente/Downloads/iloveimg-resized/papelera.png")); // NOI18N
         botonEliminarContacto.setFocusable(false);
         botonEliminarContacto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonEliminarContacto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -112,7 +106,6 @@ public class GestorDeContactosBasico extends javax.swing.JFrame {
         jToolBar1.add(jSeparator1);
         jToolBar1.add(jSeparator2);
 
-        botonCambiarColor.setIcon(new javax.swing.ImageIcon("/Users/jeronimovicente/Downloads/iloveimg-resized/cambiar color.png")); // NOI18N
         botonCambiarColor.setFocusable(false);
         botonCambiarColor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonCambiarColor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -150,6 +143,7 @@ public class GestorDeContactosBasico extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Tablas", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(255, 153, 51));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         labelNombre.setText("Nombre:");
@@ -419,23 +413,29 @@ public class GestorDeContactosBasico extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
     private void jMenuItemColorFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemColorFondoActionPerformed
-           Color colorSeleccionado = JColorChooser.showDialog(this, "Elige un color", getContentPane().getBackground());
-    if (colorSeleccionado != null) {
-        getContentPane().setBackground(colorSeleccionado);
+           Color color = JColorChooser.showDialog(this, "Elige un color", getContentPane().getBackground());
+    if (color != null) {
+        getContentPane().setBackground(color);
+        
+        jTable1.setBackground(color);
+        
+        jPanel2.setBackground(color);
+        jPanel3.setBackground(color);
+        jPanel4.setBackground(color);
     }
     }//GEN-LAST:event_jMenuItemColorFondoActionPerformed
 
     private void botonCambiarColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCambiarColorActionPerformed
   Color color = JColorChooser.showDialog(this, "Seleccione un Color de Fondo", getContentPane().getBackground());
-    if (color != null) {
 
         getContentPane().setBackground(color);
         jTable1.setBackground(color);
-        jTabbedPane2.setBackground(color);
+        
         jPanel2.setBackground(color);
         jPanel3.setBackground(color);
         jPanel4.setBackground(color);
-    }
+        
+    
     }//GEN-LAST:event_botonCambiarColorActionPerformed
 
     private void jMenuItemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAyudaActionPerformed
@@ -484,36 +484,12 @@ public class GestorDeContactosBasico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregarContacto;
-    private javax.swing.JButton botonAgregarContactoFormulario;
-    private javax.swing.JButton botonAgregarContactoFormulario1;
     private javax.swing.JButton botonCambiarColor;
     private javax.swing.JButton botonEliminarContacto;
     private javax.swing.JButton botonGuardarContacto;
     private javax.swing.JComboBox<String> cbCategoria;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JLabel jLabelCategoria;
-    private javax.swing.JLabel jLabelCategoria1;
-    private javax.swing.JLabel jLabelCategoria2;
-    private javax.swing.JLabel jLabelCategoria3;
-    private javax.swing.JLabel jLabelEmail;
-    private javax.swing.JLabel jLabelEmail1;
-    private javax.swing.JLabel jLabelEmail2;
-    private javax.swing.JLabel jLabelEmail3;
-    private javax.swing.JLabel jLabelNombre;
-    private javax.swing.JLabel jLabelNombre1;
-    private javax.swing.JLabel jLabelNombre2;
-    private javax.swing.JLabel jLabelNombre3;
-    private javax.swing.JLabel jLabelTelef;
-    private javax.swing.JLabel jLabelTelef1;
-    private javax.swing.JLabel jLabelTelef2;
-    private javax.swing.JLabel jLabelTelef3;
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar1;
@@ -522,31 +498,15 @@ public class GestorDeContactosBasico extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemGuardarLista;
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenu jMenuVer;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTextField jtfCategoria;
-    private javax.swing.JTextField jtfCategoria1;
-    private javax.swing.JTextField jtfCategoria2;
-    private javax.swing.JTextField jtfCategoria3;
-    private javax.swing.JTextField jtfNombre;
-    private javax.swing.JTextField jtfNombre1;
-    private javax.swing.JTextField jtfNombre2;
-    private javax.swing.JTextField jtfNombre3;
-    private javax.swing.JTextField jtfTelefono;
-    private javax.swing.JTextField jtfTelefono1;
-    private javax.swing.JTextField jtfTelefono2;
-    private javax.swing.JTextField jtfTelefono3;
     private javax.swing.JLabel labelCateg;
     private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelNombre;
