@@ -1,4 +1,5 @@
 Cambiar color fondo:
+---------------------------------------------------------------------------------------------------------------
 
 Color color = JColorChooser.showDialog(this, "Elige un color", getContentPane().getBackground());
     if (color != null) {
@@ -6,13 +7,29 @@ Color color = JColorChooser.showDialog(this, "Elige un color", getContentPane().
         jTable1.setBackground(color);
         jPanel2.setBackground(color);
 
+
+Color fondo:
+---------------------------------------------------------------------------------------------------------------
+
+Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el texto", jTextArea1.getForeground());
+
+    if (nuevoColor != null) {
+        JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
+        JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
+        
+        textArea.setForeground(nuevoColor);
+    }
+
+
 Salir:
+---------------------------------------------------------------------------------------------------------------
 
 int respuesta = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas salir?", "Confirmación", JOptionPane.YES_NO_OPTION);
     if (respuesta == JOptionPane.YES_OPTION) {
         System.exit(0);
 
 Guardar Tabla en archivo:
+---------------------------------------------------------------------------------------------------------------
 
 JFileChooser fileChooser = new JFileChooser();
     int selection = fileChooser.showSaveDialog(this);
@@ -34,6 +51,7 @@ JFileChooser fileChooser = new JFileChooser();
 
 
 Agregar campos de formulario a tabla:
+---------------------------------------------------------------------------------------------------------------
 
     String nombre = tfNombre.getText();
     String telefono = tfTelef.getText();
@@ -54,6 +72,7 @@ Agregar campos de formulario a tabla:
     }
 
 Menu Ayuda:
+---------------------------------------------------------------------------------------------------------------
 
            JOptionPane.showMessageDialog(this, 
             "Gestor de Contactos Básico v1.0\n\n" +
@@ -63,6 +82,7 @@ Menu Ayuda:
             "Acerca de", JOptionPane.INFORMATION_MESSAGE);
 
 Exportar Archivo:
+---------------------------------------------------------------------------------------------------------------
 
 JFileChooser fileChooser = new JFileChooser();
     int resultado = fileChooser.showSaveDialog(this);
@@ -79,6 +99,7 @@ JFileChooser fileChooser = new JFileChooser();
 
 
 Imprimir en TextArea:
+---------------------------------------------------------------------------------------------------------------
 
 TexField|
 	|  getText().trim()
@@ -98,6 +119,7 @@ jTextArea.setText
 
 
 Ocultar PANEL
+---------------------------------------------------------------------------------------------------------------
 
 if (jToggleButton1.isSelected()) {
             jPanel3.setVisible(true); 
@@ -109,6 +131,7 @@ if (jToggleButton1.isSelected()) {
 
 
 AGREGAR A ARBOLES
+---------------------------------------------------------------------------------------------------------------
 
     String nombre = tfNombre.getText();
     String codigo = tfCodigo.getText();
