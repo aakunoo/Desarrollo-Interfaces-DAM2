@@ -21,25 +21,25 @@ public class TableroAjedrez extends javax.swing.JFrame {
      */
     public TableroAjedrez() {
         initComponents();
-        boolean boo=true;
+        boolean boleano = true;
         int cont=0;
         
         for (int i = 0; i < 8; i++) {
             if (i%2==0) {
-                boo=true;
+                boleano =true;
             }else{
-            boo=false;
+            boleano =false;
             }
             
             for (int j = 0; j < 8; j++) {
                 JPanel casilla= new JPanel();
                 casilla.setMinimumSize(new Dimension(50,50));
                 jPanel1.add(casilla);
-                 if (boo) {
-                boo=false;               
+                 if (boleano) {
+                boleano=false;               
                 casilla.setBackground(Color.WHITE);
-            }else if (!boo) {
-                boo=true;
+            }else if (!boleano) {
+                boleano = true;
                 casilla.setBackground(Color.BLACK);
             }
                 

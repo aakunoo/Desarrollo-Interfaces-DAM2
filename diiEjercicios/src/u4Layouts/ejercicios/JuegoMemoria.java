@@ -4,59 +4,76 @@
  */
 package u4Layouts.ejercicios;
 
+
 import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Collections;
+import javax.swing.JToggleButton;
 
 /**
  *
  * @author Manana
  */
 public class JuegoMemoria extends javax.swing.JFrame {
-    private JButton[] botones; 
-    private Color[] colores;
-    private JButton primerBoton = null; 
-    private JButton segundoBoton = null;  
+    
+    private final int NUM_CARTAS = 16;
+    private ArrayList<Color> colores;
+    private ArrayList<JToggleButton> cartas;
+   
     
     
     /**
      * Creates new form JuegoMemoria
      */
     public JuegoMemoria() {
+        
         initComponents();
-       setLayout(new GridLayout(4, 4)); // Grid de 4x4
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(400, 400);
+        iniciarCartas();
+        pack();
         setLocationRelativeTo(null);
-
-        // Crear botones y colores
-        botones = new JButton[16];
-        //colores = generarColores();
-
-        for (int i = 0; i < botones.length; i++) {
-            botones[i] = new JButton();
-            botones[i].setBackground(Color.GRAY);
-            botones[i].setOpaque(true);
-            botones[i].setBorderPainted(false);
-            botones[i].putClientProperty("color", colores[i]);
-            botones[i].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    //manejarClick((JButton) e.getSource());
-                }
-            });
-
-            add(botones[i]);;
-            
+    }
+    
+    private void iniciarCartas(){
+        
+        Color[] coloresBase = {
+            Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW,
+            Color.ORANGE, Color.PINK, Color.CYAN, Color.MAGENTA
+        };
+        
+        
+        // Duplicar los colores para hacer parejas
+        colores = new ArrayList<>();
+        for(Color color : coloresBase){
+            colores.add(color);
+            colores.add(color); 
         }
         
+        Collections.shuffle(colores); // Para mezclar los colores
         
+        cartas = new ArrayList();
         
-        
-        
+        //jPanel1.setMinimumSize(new Dimension(50,50)); // Para darle tamaño inicial a la ventana.
+        for(int i=0; i<NUM_CARTAS; i++){
+            JToggleButton carta = new JToggleButton();
+            carta.setPreferredSize(new Dimension(50, 50)); // Tamaño preferido
+            carta.setOpaque(true);
+            carta.setBackground(Color.GRAY);
+            
+            int index = i;
+            
+            carta.addActionListener(e -> mostrarColor(carta, index));
+
+            cartas.add(carta);
+            jPanel1.add(carta); // Para añadir los jtb al jpanel.
+        }   
     }
+    private void mostrarColor(JToggleButton carta, int index) {
+        // Muestra el color asociado a la carta cuando se selecciona
+        carta.setBackground(carta.isSelected() ? colores.get(index) : null);
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,10 +84,22 @@ public class JuegoMemoria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout(4, 4));
+        jPanel1 = new javax.swing.JPanel();
 
-        pack();
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new java.awt.GridLayout(4, 4));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -84,7 +113,7 @@ public class JuegoMemoria extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -109,5 +138,6 @@ public class JuegoMemoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
