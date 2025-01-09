@@ -4,7 +4,6 @@
  */
 package u2Ejercicios;
 
-import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
@@ -352,10 +351,9 @@ public class PiedraPapelTijera extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                UIManager.setLookAndFeel( new FlatDarkLaf() );
-            } catch( UnsupportedLookAndFeelException ex ) {
-            System.err.println( "Failed to initialize LaF" );
+               
+             {
+   
         }
                 new PiedraPapelTijera().setVisible(true);
             }
