@@ -2,9 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package u2Ejercicios;
+package u6.ComponentesPropios.practica;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -13,19 +19,17 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
  * @author Manana
  */
-public class BlocDeNotas extends javax.swing.JFrame {
+public class BlocDeNotasConPopUp extends javax.swing.JFrame {
 
     /**
      * Creates new form BlocDeNotas
      */
-    public BlocDeNotas() {
+    public BlocDeNotasConPopUp() {
         initComponents();
     }
 
@@ -38,9 +42,19 @@ public class BlocDeNotas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popUpMenu = new javax.swing.JPopupMenu();
+        MenuCopiarSelecc = new javax.swing.JMenuItem();
+        MenuCortarSelecc = new javax.swing.JMenuItem();
+        MenuPegarSelecc = new javax.swing.JMenuItem();
+        MenuSeleccionarTodo = new javax.swing.JMenuItem();
+        MenuBuscar = new javax.swing.JMenuItem();
+        MenuTipografia = new javax.swing.JMenu();
+        tipo1 = new javax.swing.JMenuItem();
+        tipo2 = new javax.swing.JMenuItem();
+        tipo3 = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textArea = new javax.swing.JTextArea();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -62,6 +76,69 @@ public class BlocDeNotas extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
+        MenuCopiarSelecc.setText("Copiar texto seleccionado");
+        MenuCopiarSelecc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCopiarSeleccActionPerformed(evt);
+            }
+        });
+        popUpMenu.add(MenuCopiarSelecc);
+
+        MenuCortarSelecc.setText("Cortar");
+        popUpMenu.add(MenuCortarSelecc);
+
+        MenuPegarSelecc.setText("Pegar");
+        MenuPegarSelecc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuPegarSeleccActionPerformed(evt);
+            }
+        });
+        popUpMenu.add(MenuPegarSelecc);
+
+        MenuSeleccionarTodo.setText("Seleccionar todo");
+        MenuSeleccionarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuSeleccionarTodoActionPerformed(evt);
+            }
+        });
+        popUpMenu.add(MenuSeleccionarTodo);
+
+        MenuBuscar.setText("Buscar");
+        MenuBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuBuscarActionPerformed(evt);
+            }
+        });
+        popUpMenu.add(MenuBuscar);
+
+        MenuTipografia.setText("Tipografia");
+
+        tipo1.setText("Arial");
+        tipo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipo1ActionPerformed(evt);
+            }
+        });
+        MenuTipografia.add(tipo1);
+
+        tipo2.setText("Calibri");
+        tipo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipo2ActionPerformed(evt);
+            }
+        });
+        MenuTipografia.add(tipo2);
+
+        tipo3.setText("Times new Roman");
+        tipo3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipo3ActionPerformed(evt);
+            }
+        });
+        MenuTipografia.add(tipo3);
+
+        popUpMenu.add(MenuTipografia);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -71,16 +148,16 @@ public class BlocDeNotas extends javax.swing.JFrame {
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane1.setViewportView(textArea);
+        textArea.setComponentPopupMenu(popUpMenu);
 
         jTabbedPane1.addTab("tab1", jScrollPane1);
 
         jToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jToolBar1.setRollover(true);
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\hojaenblanco(1).png")); // NOI18N
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -91,7 +168,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton1);
 
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\abrirarchivo(2).png")); // NOI18N
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -102,7 +178,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton2);
 
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\guardar(1).png")); // NOI18N
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -114,7 +189,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
         jToolBar1.add(jButton3);
         jToolBar1.add(jSeparator1);
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\colortexto(1).png")); // NOI18N
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -125,7 +199,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton5);
 
-        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\colorfondo(1).png")); // NOI18N
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -137,7 +210,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
         jToolBar1.add(jButton6);
         jToolBar1.add(jSeparator2);
 
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\ayuda(1).png")); // NOI18N
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -152,7 +224,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
 
         jMenu1.setText("Archivo");
 
-        jMenuItemNuevo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\hojaenblanco(1).png")); // NOI18N
         jMenuItemNuevo.setText("Nuevo");
         jMenuItemNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +232,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemNuevo);
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\abrirarchivo(2).png")); // NOI18N
         jMenuItem1.setText("Abrir");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +240,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\guardar(1).png")); // NOI18N
         jMenuItem2.setText("Guardar");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +260,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
 
         jMenu2.setText("Vista");
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\colortexto(1).png")); // NOI18N
         jMenuItem3.setText("Color de texto");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +268,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\colorfondo(1).png")); // NOI18N
         jMenuItem5.setText("Color de fondo");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,7 +280,6 @@ public class BlocDeNotas extends javax.swing.JFrame {
 
         jMenu3.setText("Ayuda");
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana\\Downloads\\ayuda(1).png")); // NOI18N
         jMenuItem4.setText("Acerca de");
         jMenuItem4.setToolTipText("");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -300,7 +366,7 @@ JFileChooser fileChooser = new JFileChooser();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-         Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el texto", jTextArea1.getForeground());
+         Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el texto", textArea.getForeground());
 
     if (nuevoColor != null) {
         JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
@@ -311,7 +377,7 @@ JFileChooser fileChooser = new JFileChooser();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-   Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el fondo", jTextArea1.getBackground());
+   Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el fondo", textArea.getBackground());
 
     if (nuevoColor != null) {
         JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
@@ -423,7 +489,7 @@ JFileChooser fileChooser = new JFileChooser();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-                Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el texto", jTextArea1.getForeground());
+                Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el texto", textArea.getForeground());
 
     if (nuevoColor != null) {
         JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
@@ -434,16 +500,79 @@ JFileChooser fileChooser = new JFileChooser();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el fondo", jTextArea1.getBackground());
-
+        Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el fondo", textArea.getBackground());
     if (nuevoColor != null) {
         JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
-        JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
-        
+        JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();       
         textArea.setBackground(nuevoColor);
     }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void MenuSeleccionarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSeleccionarTodoActionPerformed
+        textArea.selectAll();
+    }//GEN-LAST:event_MenuSeleccionarTodoActionPerformed
+
+    private void MenuCopiarSeleccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCopiarSeleccActionPerformed
+        String textoSeleccionado = textArea.getSelectedText();
+    if (textoSeleccionado != null) {
+        StringSelection seleccion = new StringSelection(textoSeleccionado);
+        Clipboard portapapeles = Toolkit.getDefaultToolkit().getSystemClipboard();
+        portapapeles.setContents(seleccion, null);
+        
+        JOptionPane.showMessageDialog(this, "Datos copiados al portapapeles.", 
+            "Copiado", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(this, "No hay texto seleccionado para copiar.", 
+            "Advertencia", JOptionPane.WARNING_MESSAGE);
+    }
+    }//GEN-LAST:event_MenuCopiarSeleccActionPerformed
+
+    private void MenuPegarSeleccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPegarSeleccActionPerformed
+        Clipboard portapapeles = Toolkit.getDefaultToolkit().getSystemClipboard();
+    Transferable contenido = portapapeles.getContents(null);
+    if (contenido != null && contenido.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+        try {
+            String texto = (String) contenido.getTransferData(DataFlavor.stringFlavor);
+            textArea.replaceSelection(texto); 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    }//GEN-LAST:event_MenuPegarSeleccActionPerformed
+
+    private void tipo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo1ActionPerformed
+        textArea.setFont(new Font("Arial", Font.PLAIN, 14));
+    }//GEN-LAST:event_tipo1ActionPerformed
+
+    private void tipo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo2ActionPerformed
+        textArea.setFont(new Font("Calibri", Font.ITALIC, 14));
+    }//GEN-LAST:event_tipo2ActionPerformed
+
+    private void tipo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipo3ActionPerformed
+        textArea.setFont(new Font("Times new Roman", Font.ITALIC, 14));
+    }//GEN-LAST:event_tipo3ActionPerformed
+
+    private void MenuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBuscarActionPerformed
+       buscarPalabra();
+    }//GEN-LAST:event_MenuBuscarActionPerformed
+private void buscarPalabra() {
+    String palabra = JOptionPane.showInputDialog(this, "Introduce la palabra a buscar:", "Buscar palabra", JOptionPane.QUESTION_MESSAGE);
+
+    if (palabra != null && !palabra.trim().isEmpty()) { 
+        String texto = textArea.getText(); 
+        int index = texto.indexOf(palabra); 
+
+        if (index != -1) { 
+            textArea.setSelectionStart(index); 
+            textArea.setSelectionEnd(index + palabra.length()); 
+            JOptionPane.showMessageDialog(this, "La palabra \"" + palabra + "\" ha sido encontrada y seleccionada.", "Resultado de búsqueda", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "La palabra \"" + palabra + "\" no se encuentra en el texto.", "Resultado de búsqueda", JOptionPane.WARNING_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "No se ingresó ninguna palabra.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -461,14 +590,15 @@ JFileChooser fileChooser = new JFileChooser();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BlocDeNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BlocDeNotasConPopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BlocDeNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BlocDeNotasConPopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BlocDeNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BlocDeNotasConPopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BlocDeNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BlocDeNotasConPopUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -477,12 +607,18 @@ JFileChooser fileChooser = new JFileChooser();
                 
             
         
-                new BlocDeNotas().setVisible(true);
+                new BlocDeNotasConPopUp().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MenuBuscar;
+    private javax.swing.JMenuItem MenuCopiarSelecc;
+    private javax.swing.JMenuItem MenuCortarSelecc;
+    private javax.swing.JMenuItem MenuPegarSelecc;
+    private javax.swing.JMenuItem MenuSeleccionarTodo;
+    private javax.swing.JMenu MenuTipografia;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -504,7 +640,11 @@ JFileChooser fileChooser = new JFileChooser();
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JPopupMenu popUpMenu;
+    private javax.swing.JTextArea textArea;
+    private javax.swing.JMenuItem tipo1;
+    private javax.swing.JMenuItem tipo2;
+    private javax.swing.JMenuItem tipo3;
     // End of variables declaration//GEN-END:variables
 }
