@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,7 +24,6 @@ public class LineaRecta extends javax.swing.JFrame{
     /**
      * Creates new form VentanaPrincipal
      */
-    
     private Point anterior = null;
     
     
@@ -41,6 +41,7 @@ public class LineaRecta extends javax.swing.JFrame{
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -58,18 +59,19 @@ public class LineaRecta extends javax.swing.JFrame{
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        pack();
+        setBounds(0, 0, 416, 309);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         
         if(anterior == null) {
             anterior = evt.getPoint();
+            
         } else {
             Graphics graphics = getGraphics();
             graphics.setColor(Color.red);
             graphics.drawLine(anterior.x, anterior.y, evt.getX(), evt.getY());
-            anterior = evt.getPoint();
+            anterior = null;
         }
     }//GEN-LAST:event_formMouseClicked
 

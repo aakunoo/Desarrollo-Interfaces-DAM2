@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
 
 public class DibujarFormasSobreUnaImagen {
   public static void main(String[] argv) throws Exception {
-    int width = 100;
-    int height = 100;
+    int width = 500;
+    int height = 500;
 
     BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
@@ -21,7 +21,13 @@ public class DibujarFormasSobreUnaImagen {
     g2d.fillRect(0, 0, width, height);
     g2d.setColor(Color.black);
     g2d.fillOval(0, 0, width, height);
-
+    g2d.setColor(Color.blue);
+    g2d.drawLine(0, 0, width, height);
+    g2d.drawLine(0, height, width, 0);
+    g2d.setColor(Color.ORANGE);
+    g2d.fillOval(width/2 - 40, height/2 - 40 , 80, 80);
+    
+    
     g2d.dispose();
     RenderedImage rendImage = bufferedImage;
 

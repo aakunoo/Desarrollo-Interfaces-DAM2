@@ -6,19 +6,35 @@ package u8.DosDimensiones.practica;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Manana
  */
 public class CirculosAleatorios extends javax.swing.JFrame {
-
+        private BufferedImage imagen;
+        private Point anterior = null;
+                
     /**
      * Creates new form CirculosAleatorios
      */
     public CirculosAleatorios() {
         initComponents();
+        
+        
+        getContentPane().setBackground(Color.WHITE);
+        
     }
 
     /**
@@ -31,9 +47,26 @@ public class CirculosAleatorios extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -48,18 +81,61 @@ public class CirculosAleatorios extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        pack();
+        setBounds(0, 0, 416, 309);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         Random rand = new Random();
         int tamano = rand.nextInt(81) + 20;
         Color colorAleatorio = new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
-        Graphics g = getGraphics();
+        Graphics gVentana = getGraphics();
+        Graphics gImagen = imagen.getGraphics();
         
-        g.setColor(colorAleatorio);
-        g.fillOval(evt.getX() - tamano / 2, evt.getY() - tamano / 2, tamano, tamano);
+        gVentana.setColor(colorAleatorio);
+        gImagen.setColor(colorAleatorio);
+        gVentana.fillOval(evt.getX() - tamano / 2, evt.getY() - tamano / 2, tamano, tamano);
+        gImagen.fillOval(evt.getX() - tamano / 2, evt.getY() - tamano / 2, tamano, tamano);
+        
     }//GEN-LAST:event_formMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(this, "¿Desea guardar la imagen antes de salir?", "Guardar", JOptionPane.YES_NO_OPTION)){
+            JFileChooser dialogoArch = new JFileChooser();
+            if (JFileChooser.APPROVE_OPTION == dialogoArch.showSaveDialog(this)){
+                File arch = dialogoArch.getSelectedFile();
+                try {
+                    ImageIO.write(imagen, "jpg", arch);
+                } catch (IOException ex) {
+                    Logger.getLogger(CirculosAleatorios.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    imagen = new BufferedImage(getContentPane().getWidth(), getContentPane().getHeight(), BufferedImage.TYPE_INT_RGB);
+    Graphics gImagen = imagen.getGraphics();
+    gImagen.setColor(Color.WHITE);
+    gImagen.fillRect(0, 0, imagen.getWidth(), imagen.getHeight());
+           
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+       if(anterior == null) {
+            anterior = evt.getPoint();
+            
+        } else {
+            Graphics graphics = getGraphics();
+            graphics.setColor(Color.red);
+            graphics.drawLine(anterior.x, anterior.y, evt.getX(), evt.getY());
+            anterior = evt.getPoint();
+        }
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        anterior = null;
+    }//GEN-LAST:event_formMouseReleased
 
     /**
      * @param args the command line arguments
