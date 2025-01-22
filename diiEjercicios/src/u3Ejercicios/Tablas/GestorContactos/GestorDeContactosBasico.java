@@ -5,6 +5,7 @@
 package u3Ejercicios.Tablas.GestorContactos;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -18,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author jeronimovicente
  */
 public class GestorDeContactosBasico extends javax.swing.JFrame {
-
+private Point anterior = null;
     /**
      * Creates new form GestorDeContactosBasico
      */
