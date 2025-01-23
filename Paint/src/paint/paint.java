@@ -10,6 +10,8 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JColorChooser;
@@ -27,6 +29,9 @@ public class paint extends javax.swing.JFrame {
     private Point startPoint = null;    
     private Point anterior = null;       
     private Random random = new Random();
+    private List<BufferedImage> deshacer = new ArrayList<>();
+    private List<BufferedImage> rehacer = new ArrayList<>();
+
     
     /**
      * Creates new form paint
@@ -66,7 +71,6 @@ public class paint extends javax.swing.JFrame {
         btnAerografo = new javax.swing.JButton();
         btnCuadrado = new javax.swing.JButton();
         btnOvalo = new javax.swing.JButton();
-        panelPosicion = new javax.swing.JPanel();
         lblPosicion = new javax.swing.JLabel();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
@@ -231,34 +235,19 @@ public class paint extends javax.swing.JFrame {
             }
         });
 
-        panelPosicion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
+        lblPosicion.setFont(new java.awt.Font("Segoe UI", 0, 9)); // NOI18N
+        lblPosicion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPosicion.setText("pos");
-
-        javax.swing.GroupLayout panelPosicionLayout = new javax.swing.GroupLayout(panelPosicion);
-        panelPosicion.setLayout(panelPosicionLayout);
-        panelPosicionLayout.setHorizontalGroup(
-            panelPosicionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPosicionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblPosicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelPosicionLayout.setVerticalGroup(
-            panelPosicionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPosicionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblPosicion, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        lblPosicion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout panelHerramientasLayout = new javax.swing.GroupLayout(panelHerramientas);
         panelHerramientas.setLayout(panelHerramientasLayout);
         panelHerramientasLayout.setHorizontalGroup(
             panelHerramientasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelHerramientasLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHerramientasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelHerramientasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelHerramientasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPosicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelHerramientasLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(panelHerramientasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,8 +257,7 @@ public class paint extends javax.swing.JFrame {
                             .addComponent(btnLineasRectas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAerografo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCuadrado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOvalo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(panelPosicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnOvalo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         panelHerramientasLayout.setVerticalGroup(
@@ -289,8 +277,8 @@ public class paint extends javax.swing.JFrame {
                 .addComponent(btnCuadrado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOvalo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                .addComponent(panelPosicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                .addComponent(lblPosicion, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -414,7 +402,7 @@ public class paint extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAerografoActionPerformed
 
     private void btnCuadradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuadradoActionPerformed
-         herramientaActual = "rectangulo";
+       herramientaActual = "rectangulo";
     }//GEN-LAST:event_btnCuadradoActionPerformed
 
     private void btnOvaloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOvaloActionPerformed
@@ -497,7 +485,6 @@ Graphics gVentana = panelLienzo.getGraphics();
         gBuffer.setColor(colorActual);
 
         if ("dibujoLibre".equals(herramientaActual)) {
-            // Dibujamos pequeñas líneas continuas para simular trazo libre
             if (anterior != null) {
                 gVentana.drawLine(anterior.x, anterior.y, evt.getX(), evt.getY());
                 gBuffer.drawLine(anterior.x, anterior.y, evt.getX(), evt.getY());
@@ -505,7 +492,7 @@ Graphics gVentana = panelLienzo.getGraphics();
             anterior = evt.getPoint();
         }
         else if ("aerografo".equals(herramientaActual)) {
-            // Dibujamos puntitos aleatorios alrededor del cursor
+            // puntitos aleatorios alrededor del cursor
             int radio = 15;
             int cantidad = 10;
             
@@ -515,7 +502,6 @@ Graphics gVentana = panelLienzo.getGraphics();
                 int x = evt.getX() + rx;
                 int y = evt.getY() + ry;
                 
-                // Comprobamos que no salga del panel
                 if (x >= 0 && x < buffer.getWidth() && y >= 0 && y < buffer.getHeight()) {
                     gVentana.fillRect(x, y, 1, 1);
                     gBuffer.fillRect(x, y, 1, 1);
@@ -590,7 +576,7 @@ Graphics gVentana = panelLienzo.getGraphics();
     }//GEN-LAST:event_panelLienzoMouseReleased
 
     private void panelLienzoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelLienzoMouseMoved
-        lblPosicion.setText("X: " + evt.getX() + " | Y: " + evt.getY());
+        lblPosicion.setText(evt.getX() + " | " + evt.getY());
     }//GEN-LAST:event_panelLienzoMouseMoved
 
     private void salirAplicacion() {
@@ -723,6 +709,5 @@ Graphics gVentana = panelLienzo.getGraphics();
     private javax.swing.JMenuItem menuItemSalir;
     private javax.swing.JPanel panelHerramientas;
     private javax.swing.JPanel panelLienzo;
-    private javax.swing.JPanel panelPosicion;
     // End of variables declaration//GEN-END:variables
 }
