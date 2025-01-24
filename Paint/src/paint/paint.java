@@ -6,6 +6,7 @@ package paint;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -31,6 +32,8 @@ public class paint extends javax.swing.JFrame {
     private Random random = new Random();
     private List<BufferedImage> deshacer = new ArrayList<>();
     private List<BufferedImage> rehacer = new ArrayList<>();
+    private int grosorPincel = 5; 
+
 
     
     /**
@@ -57,6 +60,7 @@ public class paint extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popUpTamañoPincel = new javax.swing.JPopupMenu();
         jToolBar = new javax.swing.JToolBar();
         btnNuevo = new javax.swing.JButton();
         btnExportar = new javax.swing.JButton();
@@ -197,6 +201,14 @@ public class paint extends javax.swing.JFrame {
 
         btnDibujoLibre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paint/dibujoLibre(1).png"))); // NOI18N
         btnDibujoLibre.setToolTipText("Dibujo libre.");
+        btnDibujoLibre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDibujoLibreMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnDibujoLibreMouseReleased(evt);
+            }
+        });
         btnDibujoLibre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDibujoLibreActionPerformed(evt);
@@ -426,11 +438,21 @@ public class paint extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemExportarActionPerformed
 
     private void menuItemDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDeshacerActionPerformed
-        // TODO add your handling code here:
+        if (!deshacer.isEmpty()) {
+        rehacer.add(clonarImagen(buffer));
+
+        buffer = deshacer.remove(deshacer.size() - 1);
+        actualizarLienzo();
+    }
     }//GEN-LAST:event_menuItemDeshacerActionPerformed
 
     private void menuItemRehacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRehacerActionPerformed
-        // TODO add your handling code here:
+       if (!rehacer.isEmpty()) {
+        deshacer.add(clonarImagen(buffer));
+
+        buffer = rehacer.remove(rehacer.size() - 1);
+        actualizarLienzo();
+    }
     }//GEN-LAST:event_menuItemRehacerActionPerformed
 
     private void menuItemManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemManualActionPerformed
@@ -465,7 +487,12 @@ public class paint extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExportarActionPerformed
 
     private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
-        // TODO add your handling code here:
+        if (!deshacer.isEmpty()) {
+        rehacer.add(clonarImagen(buffer));
+
+        buffer = deshacer.remove(deshacer.size() - 1);
+        actualizarLienzo();
+    }
     }//GEN-LAST:event_btnDeshacerActionPerformed
 
     private void btnManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManualActionPerformed
@@ -478,39 +505,40 @@ public class paint extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseDragged
 
     private void panelLienzoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelLienzoMouseDragged
-Graphics gVentana = panelLienzo.getGraphics();
-        Graphics gBuffer = buffer.getGraphics();
-        
-        gVentana.setColor(colorActual);
-        gBuffer.setColor(colorActual);
+    Graphics2D gVentana = (Graphics2D) panelLienzo.getGraphics();
+    Graphics2D gBuffer = (Graphics2D) buffer.getGraphics();
 
-        if ("dibujoLibre".equals(herramientaActual)) {
-            if (anterior != null) {
-                gVentana.drawLine(anterior.x, anterior.y, evt.getX(), evt.getY());
-                gBuffer.drawLine(anterior.x, anterior.y, evt.getX(), evt.getY());
-            }
-            anterior = evt.getPoint();
+    gVentana.setColor(colorActual);
+    gBuffer.setColor(colorActual);
+
+    gVentana.setStroke(new java.awt.BasicStroke(grosorPincel, java.awt.BasicStroke.CAP_ROUND, java.awt.BasicStroke.JOIN_ROUND));
+    gBuffer.setStroke(new java.awt.BasicStroke(grosorPincel, java.awt.BasicStroke.CAP_ROUND, java.awt.BasicStroke.JOIN_ROUND));
+
+    if ("dibujoLibre".equals(herramientaActual)) {
+        if (anterior != null) {
+            gVentana.drawLine(anterior.x, anterior.y, evt.getX(), evt.getY());
+            gBuffer.drawLine(anterior.x, anterior.y, evt.getX(), evt.getY());
         }
-        else if ("aerografo".equals(herramientaActual)) {
-            // puntitos aleatorios alrededor del cursor
-            int radio = 15;
-            int cantidad = 10;
-            
-            for (int i = 0; i < cantidad; i++) {
-                int rx = random.nextInt(radio * 2 + 1) - radio;
-                int ry = random.nextInt(radio * 2 + 1) - radio;
-                int x = evt.getX() + rx;
-                int y = evt.getY() + ry;
-                
-                if (x >= 0 && x < buffer.getWidth() && y >= 0 && y < buffer.getHeight()) {
-                    gVentana.fillRect(x, y, 1, 1);
-                    gBuffer.fillRect(x, y, 1, 1);
-                }
+        anterior = evt.getPoint();
+    } else if ("aerografo".equals(herramientaActual)) {
+        int radio = 15;
+        int cantidad = 10;
+
+        for (int i = 0; i < cantidad; i++) {
+            int rx = random.nextInt(radio * 2 + 1) - radio;
+            int ry = random.nextInt(radio * 2 + 1) - radio;
+            int x = evt.getX() + rx;
+            int y = evt.getY() + ry;
+
+            if (x >= 0 && x < buffer.getWidth() && y >= 0 && y < buffer.getHeight()) {
+                gVentana.fillRect(x, y, 1, 1);
+                gBuffer.fillRect(x, y, 1, 1);
             }
         }
-        
-        gVentana.dispose();
-        gBuffer.dispose();
+    }
+
+    gVentana.dispose();
+    gBuffer.dispose();
     }//GEN-LAST:event_panelLienzoMouseDragged
 
     private void panelLienzoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelLienzoMousePressed
@@ -535,49 +563,67 @@ Graphics gVentana = panelLienzo.getGraphics();
     }//GEN-LAST:event_panelLienzoMousePressed
 
     private void panelLienzoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelLienzoMouseReleased
-        if (startPoint != null) {
-            Point endPoint = evt.getPoint();
-            Graphics gVentana = panelLienzo.getGraphics();   
-            Graphics gBuffer = buffer.getGraphics();          
+         if (startPoint != null) {
+        Point endPoint = evt.getPoint();
+        Graphics gVentana = panelLienzo.getGraphics();   
+        Graphics gBuffer = buffer.getGraphics();          
 
-            gVentana.setColor(colorActual);
-            gBuffer.setColor(colorActual);
+        gVentana.setColor(colorActual);
+        gBuffer.setColor(colorActual);
 
-            if ("lineasRectas".equals(herramientaActual)) {
-                
-                gVentana.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
-                gBuffer.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
-            } 
-            else if ("rectangulo".equals(herramientaActual)) {
-                int x = Math.min(startPoint.x, endPoint.x);
-                int y = Math.min(startPoint.y, endPoint.y);
-                int w = Math.abs(endPoint.x - startPoint.x);
-                int h = Math.abs(endPoint.y - startPoint.y);
-                
-                gVentana.fillRect(x, y, w, h);
-                gBuffer.fillRect(x, y, w, h);
-            }
-            else if ("ovalo".equals(herramientaActual)) {
-                int x = Math.min(startPoint.x, endPoint.x);
-                int y = Math.min(startPoint.y, endPoint.y);
-                int w = Math.abs(endPoint.x - startPoint.x);
-                int h = Math.abs(endPoint.y - startPoint.y);
-                
-                gVentana.fillOval(x, y, w, h);
-                gBuffer.fillOval(x, y, w, h);
-            }
-
-            gVentana.dispose();
-            gBuffer.dispose();
-            startPoint = null;
+        if ("lineasRectas".equals(herramientaActual)) {
+            gVentana.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+            gBuffer.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+        } 
+        else if ("rectangulo".equals(herramientaActual)) {
+            int x = Math.min(startPoint.x, endPoint.x);
+            int y = Math.min(startPoint.y, endPoint.y);
+            int w = Math.abs(endPoint.x - startPoint.x);
+            int h = Math.abs(endPoint.y - startPoint.y);
+            
+            gVentana.fillRect(x, y, w, h);
+            gBuffer.fillRect(x, y, w, h);
         }
-        
-        anterior = null;
+        else if ("ovalo".equals(herramientaActual)) {
+            int x = Math.min(startPoint.x, endPoint.x);
+            int y = Math.min(startPoint.y, endPoint.y);
+            int w = Math.abs(endPoint.x - startPoint.x);
+            int h = Math.abs(endPoint.y - startPoint.y);
+            
+            gVentana.fillOval(x, y, w, h);
+            gBuffer.fillOval(x, y, w, h);
+        }
+
+        guardarEstado();
+
+        gVentana.dispose();
+        gBuffer.dispose();
+        startPoint = null;
+    }
+    
+    anterior = null;
     }//GEN-LAST:event_panelLienzoMouseReleased
 
     private void panelLienzoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelLienzoMouseMoved
         lblPosicion.setText(evt.getX() + " | " + evt.getY());
     }//GEN-LAST:event_panelLienzoMouseMoved
+
+    private void btnDibujoLibreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDibujoLibreMouseClicked
+
+    }//GEN-LAST:event_btnDibujoLibreMouseClicked
+
+    private void btnDibujoLibreMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDibujoLibreMouseReleased
+            if (evt.isPopupTrigger()) {
+        TamañoPincelDialog dialog = new TamañoPincelDialog(this, true);
+        dialog.setVisible(true);
+        int nuevoGrosor = dialog.getTamañoSeleccionado();
+        if (nuevoGrosor > 0) {
+            grosorPincel = nuevoGrosor;
+            System.out.println("Grosor actualizado a: " + grosorPincel); // Verifica en consola
+        }
+    }
+    herramientaActual = "dibujoLibre";
+    }//GEN-LAST:event_btnDibujoLibreMouseReleased
 
     private void salirAplicacion() {
     int respuesta = JOptionPane.showConfirmDialog(
@@ -647,6 +693,32 @@ Graphics gVentana = panelLienzo.getGraphics();
         );
     }
     
+    private void guardarEstado() {
+    BufferedImage copiaBuffer = new BufferedImage(buffer.getWidth(), buffer.getHeight(), buffer.getType());
+    Graphics g = copiaBuffer.getGraphics();
+    g.drawImage(buffer, 0, 0, null);
+    g.dispose();
+
+    deshacer.add(copiaBuffer);
+
+    rehacer.clear();
+}
+    
+    
+    private BufferedImage clonarImagen(BufferedImage imagen) {
+        BufferedImage copia = new BufferedImage(imagen.getWidth(), imagen.getHeight(), imagen.getType());
+        Graphics g = copia.getGraphics();
+        g.drawImage(imagen, 0, 0, null);
+        g.dispose();
+        return copia;
+    }
+
+    private void actualizarLienzo() {
+    Graphics g = panelLienzo.getGraphics();
+    g.drawImage(buffer, 0, 0, null);
+    g.dispose();
+}
+
     /**
      * @param args the command line arguments
      */
@@ -709,5 +781,6 @@ Graphics gVentana = panelLienzo.getGraphics();
     private javax.swing.JMenuItem menuItemSalir;
     private javax.swing.JPanel panelHerramientas;
     private javax.swing.JPanel panelLienzo;
+    private javax.swing.JPopupMenu popUpTamañoPincel;
     // End of variables declaration//GEN-END:variables
 }

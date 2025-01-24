@@ -1,0 +1,10 @@
+Examen Interfaces
+
+- Menu PopUp (Con tabla)
+- Cambiar Aspecto de filas o columnas de algunos elementos de la tabla.
+- Editor de tabla (Spinner, checkbox...)
+- Crear componente propio y meterlo a la paleta.
+- ComboBox con Renderer para cambiar aspecto.
+- Algo de los idiomas.
+- Algo de dibujar.
+- Creacion de .jar
