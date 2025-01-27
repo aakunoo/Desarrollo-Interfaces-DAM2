@@ -18,21 +18,19 @@ public class TablaColores extends DefaultTableCellRenderer {
     public TablaColores() {
     }
     
-    
-
-    @Override
+  @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component celda = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
         
         if (!isSelected) {
             if (row % 2 == 0) {
-                celda.setBackground(Color.LIGHT_GRAY); 
+                celda.setBackground(Color.GREEN); 
             } else {
-                celda.setBackground(Color.WHITE); 
+                celda.setBackground(Color.RED); 
             }
         } else {
             celda.setBackground(Color.BLUE); // fila seleccionada
-            celda.setForeground(Color.WHITE);
+            celda.setForeground(Color.RED);
         }
         return celda;
     }
