@@ -16,6 +16,12 @@ Color color = JColorChooser.showDialog(this, "Elige un color", getContentPane().
         jTable1.setBackground(color);
     }
 }
+
+// -------------------------------------------------------------------------------------------------
+// ------------------------------ PONER ICONO EN EL JFRAME ------------------------------
+	initComponents();
+	setIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
+
 // -------------------------------------------------------------------------------------------------
 // ------------------------------ AÑADIR COMBO BOX EN TABLA ------------------------------
 
