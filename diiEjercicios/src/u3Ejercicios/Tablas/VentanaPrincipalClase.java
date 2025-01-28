@@ -6,7 +6,9 @@ package u3Ejercicios.Tablas;
 
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.BorderUIResource;
@@ -23,6 +25,7 @@ public class VentanaPrincipalClase extends javax.swing.JFrame {
      */
     public VentanaPrincipalClase() {
         initComponents();
+        tabla.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(new JComboBox<>(new String []{"Unionistas", "Valencia", "Madrid", "Betis", "Barcelona"})));
     }
 
     /**
