@@ -74,7 +74,8 @@ public class Biblioteca extends javax.swing.JFrame {
         menuitemFondo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Biblioteca");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("examen/interfaces/jeronimo/Bundle"); // NOI18N
+        setTitle(bundle.getString("Biblioteca.title")); // NOI18N
         setIconImages(getIconImages());
         setName("Biblioteca"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -86,7 +87,6 @@ public class Biblioteca extends javax.swing.JFrame {
         jToolBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jToolBar1.setRollover(true);
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Manana.DESKTOP-0QML5MI\\Documents\\NetBeansProjects\\Examen Interfaces Jeronimo\\src\\examen\\interfaces\\jeronimo\\exportar.png")); // NOI18N
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -100,46 +100,46 @@ public class Biblioteca extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("ISBN:");
+        jLabel1.setText(bundle.getString("Biblioteca.jLabel1.text")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Título:");
+        jLabel2.setText(bundle.getString("Biblioteca.jLabel2.text")); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Autor:");
+        jLabel3.setText(bundle.getString("Biblioteca.jLabel3.text")); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Editorial:");
+        jLabel4.setText(bundle.getString("Biblioteca.jLabel4.text")); // NOI18N
 
-        tfEditorial.setToolTipText("Introduce Editorial");
+        tfEditorial.setToolTipText(bundle.getString("Biblioteca.tfEditorial.toolTipText")); // NOI18N
 
-        tfAutor.setToolTipText("Introduce Autor");
+        tfAutor.setToolTipText(bundle.getString("Biblioteca.tfAutor.toolTipText")); // NOI18N
 
-        tfTitulo.setToolTipText("Introduce Titulo");
+        tfTitulo.setToolTipText(bundle.getString("Biblioteca.tfTitulo.toolTipText")); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setText("Géneros:");
+        jLabel5.setText(bundle.getString("Biblioteca.jLabel5.text")); // NOI18N
 
         cbGeneros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "Ciencia Ficción", "Misterio", "Poesía" }));
-        cbGeneros.setToolTipText("Selecciona un género del libro");
+        cbGeneros.setToolTipText(bundle.getString("Biblioteca.cbGeneros.toolTipText")); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setText("Formato:");
+        jLabel6.setText(bundle.getString("Biblioteca.jLabel6.text")); // NOI18N
 
         buttonGroup1.add(rbPapel);
-        rbPapel.setText("Papel");
-        rbPapel.setToolTipText("Si el libro tiene formato a papel");
+        rbPapel.setText(bundle.getString("Biblioteca.rbPapel.text")); // NOI18N
+        rbPapel.setToolTipText(bundle.getString("Biblioteca.rbPapel.toolTipText")); // NOI18N
 
         buttonGroup1.add(rbElect);
-        rbElect.setText("Electrónico");
-        rbElect.setToolTipText("Si el libro tiene formato electrónico");
+        rbElect.setText(bundle.getString("Biblioteca.rbElect.text")); // NOI18N
+        rbElect.setToolTipText(bundle.getString("Biblioteca.rbElect.toolTipText")); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setText("Año:");
+        jLabel7.setText(bundle.getString("Biblioteca.jLabel7.text")); // NOI18N
 
-        spinnerAGNO.setToolTipText("Año de salida del libro");
+        spinnerAGNO.setToolTipText(bundle.getString("Biblioteca.spinnerAGNO.toolTipText")); // NOI18N
 
-        botonRegistrar.setText("Registrar");
+        botonRegistrar.setText(bundle.getString("Biblioteca.botonRegistrar.text")); // NOI18N
         botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonRegistrarActionPerformed(evt);
@@ -147,7 +147,7 @@ public class Biblioteca extends javax.swing.JFrame {
         });
 
         tfISBN.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#############"))));
-        tfISBN.setToolTipText("Introduce el ISBN");
+        tfISBN.setToolTipText(bundle.getString("Biblioteca.tfISBN.toolTipText")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -298,9 +298,9 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("Archivo");
+        jMenu1.setText(bundle.getString("Biblioteca.jMenu1.text")); // NOI18N
 
-        menuitemSalir.setText("Salir");
+        menuitemSalir.setText(bundle.getString("Biblioteca.menuitemSalir.text")); // NOI18N
         menuitemSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuitemSalirActionPerformed(evt);
@@ -308,7 +308,7 @@ public class Biblioteca extends javax.swing.JFrame {
         });
         jMenu1.add(menuitemSalir);
 
-        menuitemExportar.setText("Exportar");
+        menuitemExportar.setText(bundle.getString("Biblioteca.menuitemExportar.text")); // NOI18N
         menuitemExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuitemExportarActionPerformed(evt);
@@ -318,9 +318,9 @@ public class Biblioteca extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Vista");
+        jMenu2.setText(bundle.getString("Biblioteca.jMenu2.text")); // NOI18N
 
-        menuitemFondo.setText("Fondo");
+        menuitemFondo.setText(bundle.getString("Biblioteca.menuitemFondo.text")); // NOI18N
         menuitemFondo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuitemFondoActionPerformed(evt);
@@ -354,14 +354,13 @@ public class Biblioteca extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getAccessibleContext().setAccessibleName("Biblioteca");
-        getAccessibleContext().setAccessibleDescription("Biblioteca");
+        getAccessibleContext().setAccessibleDescription(bundle.getString("Biblioteca.AccessibleContext.accessibleDescription")); // NOI18N
 
         pack();
         setLocationRelativeTo(null);

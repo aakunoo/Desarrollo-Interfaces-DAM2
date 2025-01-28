@@ -5,14 +5,20 @@
 package u3Ejercicios.Tablas;
 
 import java.awt.Color;
+import java.awt.Component;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -25,7 +31,10 @@ public class VentanaPrincipalClase extends javax.swing.JFrame {
      */
     public VentanaPrincipalClase() {
         initComponents();
-        tabla.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(new JComboBox<>(new String []{"Unionistas", "Valencia", "Madrid", "Betis", "Barcelona"})));
+        annadirSpinner();
+        //tabla.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(new JCheckBox("prueba")));
+       
+        //tabla.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(new JComboBox<>(new String []{"Unionistas", "Valencia", "Madrid", "Betis", "Barcelona"})));
     }
 
     /**
@@ -225,6 +234,23 @@ public class VentanaPrincipalClase extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this,  mensaje, "Elementos seleccionados", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnVerActionPerformed
 
+    private void annadirSpinner() {
+        TableColumn columnaSpinner = tabla.getColumnModel().getColumn(1);
+        columnaSpinner.setCellEditor(new DefaultCellEditor(new JTextField()){
+            JSpinner sp = new JSpinner();
+            
+            @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            sp.setValue(value != null ? value : 0);
+            return sp;
+        }
+        @Override
+        public Object getCellEditorValue() {
+            return sp.getValue();
+        }
+    });     
+    }
+    
     /**
      * @param args the command line arguments
      */

@@ -67,14 +67,14 @@ public class BlocDeNotasConPopUp extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemNuevo = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemAbrir = new javax.swing.JMenuItem();
+        jMenuItemGuardar = new javax.swing.JMenuItem();
         jMenuItemCerrarPestaña = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItemColorTexto = new javax.swing.JMenuItem();
+        jMenuItemColorFondo = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItemAcercaDe = new javax.swing.JMenuItem();
 
         MenuCopiarSelecc.setText("Copiar texto seleccionado");
         MenuCopiarSelecc.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +85,11 @@ public class BlocDeNotasConPopUp extends javax.swing.JFrame {
         popUpMenu.add(MenuCopiarSelecc);
 
         MenuCortarSelecc.setText("Cortar");
+        MenuCortarSelecc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCortarSeleccActionPerformed(evt);
+            }
+        });
         popUpMenu.add(MenuCortarSelecc);
 
         MenuPegarSelecc.setText("Pegar");
@@ -232,21 +237,21 @@ public class BlocDeNotasConPopUp extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemNuevo);
 
-        jMenuItem1.setText("Abrir");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemAbrir.setText("Abrir");
+        jMenuItemAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemAbrirActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(jMenuItemAbrir);
 
-        jMenuItem2.setText("Guardar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemGuardar.setText("Guardar");
+        jMenuItemGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemGuardarActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(jMenuItemGuardar);
 
         jMenuItemCerrarPestaña.setText("Cerrar Pestaña");
         jMenuItemCerrarPestaña.addActionListener(new java.awt.event.ActionListener() {
@@ -260,34 +265,34 @@ public class BlocDeNotasConPopUp extends javax.swing.JFrame {
 
         jMenu2.setText("Vista");
 
-        jMenuItem3.setText("Color de texto");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemColorTexto.setText("Color de texto");
+        jMenuItemColorTexto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuItemColorTextoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenu2.add(jMenuItemColorTexto);
 
-        jMenuItem5.setText("Color de fondo");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemColorFondo.setText("Color de fondo");
+        jMenuItemColorFondo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jMenuItemColorFondoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem5);
+        jMenu2.add(jMenuItemColorFondo);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Ayuda");
 
-        jMenuItem4.setText("Acerca de");
-        jMenuItem4.setToolTipText("");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemAcercaDe.setText("Acerca de");
+        jMenuItemAcercaDe.setToolTipText("");
+        jMenuItemAcercaDe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuItemAcercaDeActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem4);
+        jMenu3.add(jMenuItemAcercaDe);
 
         jMenuBar1.add(jMenu3);
 
@@ -317,7 +322,7 @@ public class BlocDeNotasConPopUp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirActionPerformed
 JFileChooser fileChooser = new JFileChooser();
     int option = fileChooser.showOpenDialog(this);
 
@@ -335,9 +340,9 @@ JFileChooser fileChooser = new JFileChooser();
             JOptionPane.showMessageDialog(this, "Error al abrir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemAbrirActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGuardarActionPerformed
    
     JScrollPane scrollPane = (JScrollPane) jTabbedPane1.getSelectedComponent();
     JTextArea textArea = (JTextArea) scrollPane.getViewport().getView();
@@ -363,9 +368,9 @@ JFileChooser fileChooser = new JFileChooser();
             JOptionPane.showMessageDialog(this, "Error al guardar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuItemGuardarActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItemColorTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemColorTextoActionPerformed
          Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el texto", textArea.getForeground());
 
     if (nuevoColor != null) {
@@ -374,9 +379,9 @@ JFileChooser fileChooser = new JFileChooser();
         
         textArea.setForeground(nuevoColor);
     }
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuItemColorTextoActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMenuItemColorFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemColorFondoActionPerformed
    Color nuevoColor = javax.swing.JColorChooser.showDialog(this, "Elige un color para el fondo", textArea.getBackground());
 
     if (nuevoColor != null) {
@@ -385,18 +390,18 @@ JFileChooser fileChooser = new JFileChooser();
         
         textArea.setBackground(nuevoColor);
     }
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_jMenuItemColorFondoActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMenuItemAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAcercaDeActionPerformed
          JOptionPane.showMessageDialog(this, 
         "Aplicación Bloc de Notas\n" + "Desarrollado por: Jerónimo\n" + "Versión: 1.0\n" + "Fecha: 24/10/2024", "Información de autoría", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jMenuItemAcercaDeActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
     int option = JOptionPane.showConfirmDialog(this, "¿Deseas guardar los datos antes de cerrar?", "Confirmar cierre", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
     if (option == JOptionPane.YES_OPTION) {
-        jMenuItem2ActionPerformed(null);  
+        jMenuItemGuardarActionPerformed(null);  
         this.dispose();  
     } else if (option == JOptionPane.NO_OPTION) {
         this.dispose(); 
@@ -404,7 +409,7 @@ JFileChooser fileChooser = new JFileChooser();
     }//GEN-LAST:event_formWindowClosing
 
     private void jMenuItemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNuevoActionPerformed
-        JTextArea textArea = new JTextArea();
+    JTextArea textArea = new JTextArea();
     JScrollPane scrollPane = new JScrollPane(textArea);
     
     jTabbedPane1.addTab("Nuevo Documento", scrollPane);
@@ -418,7 +423,7 @@ JFileChooser fileChooser = new JFileChooser();
         int option = JOptionPane.showConfirmDialog(this, "¿Deseas guardar los cambios antes de cerrar la pestaña?", "Confirmar cierre de pestaña", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (option == JOptionPane.YES_OPTION) {
-            jMenuItem2ActionPerformed(null);  
+            jMenuItemGuardarActionPerformed(null);  
             jTabbedPane1.remove(selectedTab);  
         } else if (option == JOptionPane.NO_OPTION) {
             jTabbedPane1.remove(selectedTab);  
@@ -555,6 +560,10 @@ JFileChooser fileChooser = new JFileChooser();
     private void MenuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuBuscarActionPerformed
        buscarPalabra();
     }//GEN-LAST:event_MenuBuscarActionPerformed
+
+    private void MenuCortarSeleccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCortarSeleccActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuCortarSeleccActionPerformed
 private void buscarPalabra() {
     String palabra = JOptionPane.showInputDialog(this, "Introduce la palabra a buscar:", "Buscar palabra", JOptionPane.QUESTION_MESSAGE);
 
@@ -629,12 +638,12 @@ private void buscarPalabra() {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItemAbrir;
+    private javax.swing.JMenuItem jMenuItemAcercaDe;
     private javax.swing.JMenuItem jMenuItemCerrarPestaña;
+    private javax.swing.JMenuItem jMenuItemColorFondo;
+    private javax.swing.JMenuItem jMenuItemColorTexto;
+    private javax.swing.JMenuItem jMenuItemGuardar;
     private javax.swing.JMenuItem jMenuItemNuevo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
