@@ -108,7 +108,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                lista.add("Naranjas");
                
                ListItem naranjas = new ListItem("naranjas");
-               naranjas.setFontColor(Color.createColorWithColorSpace(new float[] {255f, 150f, 0f} ));
+              //naranjas.setFontColor(Color.createColorWithColorSpace(new float[] {255f, 150f, 0f} ));
                lista.add(naranjas);
                documento.add(lista);
                documento.close();

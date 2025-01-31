@@ -2,13 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package u2Ejercicios;
+package formulariopdf;
 
 //import com.formdev.flatlaf.FlatDarkLaf;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.List;
+import com.itextpdf.layout.element.Paragraph;
 import java.awt.Color;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -331,7 +339,6 @@ public class FormularioMatriculav2 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -428,94 +435,10 @@ limpiarFormulario();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        boolean valid = true; 
-        Border defaultBorder = jTextField1.getBorder(); 
-        Border redBorder = BorderFactory.createLineBorder(Color.RED, 2); 
-
-       
-        jTextField1.setBorder(defaultBorder);
-        jTextField2.setBorder(defaultBorder);
-        jTextField3.setBorder(defaultBorder);
-        jTextField4.setBorder(defaultBorder);
-        jTextField5.setBorder(defaultBorder);
-        jTextField6.setBorder(defaultBorder);
-        jFormattedTextField1.setBorder(defaultBorder);
-
-       
-        if (jTextField1.getText().trim().isEmpty()) {
-            jTextField1.setBorder(redBorder);
-            jTextField1.requestFocus();
-            valid = false;
-        } else if (jTextField2.getText().trim().isEmpty()) {
-            jTextField2.setBorder(redBorder);
-            jTextField2.requestFocus(); 
-            valid = false;
-        } else if (jTextField3.getText().trim().isEmpty()) {
-            jTextField3.setBorder(redBorder);
-            jTextField3.requestFocus();
-            valid = false;
-        } else if (jTextField4.getText().trim().isEmpty()) {
-            jTextField4.setBorder(redBorder);
-            jTextField4.requestFocus(); 
-            valid = false;
-        } else if (jFormattedTextField1.getText().trim().isEmpty()) {
-            jFormattedTextField1.setBorder(redBorder);
-            jFormattedTextField1.requestFocus(); 
-            valid = false;
-        } else if (jTextField5.getText().trim().isEmpty()) {
-            jTextField5.setBorder(redBorder);
-            jTextField5.requestFocus();
-            valid = false;
-        } else if (jTextField6.getText().trim().isEmpty()) {
-            jTextField6.setBorder(redBorder);
-            jTextField6.requestFocus(); 
-            valid = false;
-        } else if (jComboBox1.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(this, "Selecciona un ciclo formativo.", "Ciclo obligatorio", JOptionPane.WARNING_MESSAGE);
-            jComboBox1.requestFocus();
-            valid = false;
-        } else if (jComboBox2.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(this, "Selecciona un turno.", "Turno obligatorio", JOptionPane.WARNING_MESSAGE);
-            jComboBox2.requestFocus();
-            valid = false;
-        }
-
-        if (valid) {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Guardar formulario"); 
-            int userSelection = fileChooser.showSaveDialog(this);
-
-           
-            if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File archivoSeleccionado = fileChooser.getSelectedFile();
-             
-                if (!archivoSeleccionado.getName().toLowerCase().endsWith(".txt")) {
-                    archivoSeleccionado = new File(archivoSeleccionado.getAbsolutePath() + ".txt");
-                }
-
-                try (FileWriter escritor = new FileWriter(archivoSeleccionado)) {
-                    escritor.write("Nombre: " + jTextField1.getText() + "\n");
-                    escritor.write("Apellidos: " + jTextField2.getText() + "\n");
-                    escritor.write("NIF: " + jTextField3.getText() + "\n");
-                    escritor.write("Dirección: " + jTextField4.getText() + "\n");
-                    escritor.write("C.P.: " + jFormattedTextField1.getText() + "\n");
-                    escritor.write("Teléfono: " + jTextField5.getText() + "\n");
-                    escritor.write("Email: " + jTextField6.getText() + "\n");
-                    escritor.write("Ciclo: " + jComboBox1.getSelectedItem() + "\n");
-                    escritor.write("Turno: " + jComboBox2.getSelectedItem() + "\n");
-                    escritor.write("Actividades extraescolares: " +
-                            (jCheckBox1.isSelected() ? "Ajedrez " : "") +
-                            (jCheckBox2.isSelected() ? "Futbol Sala " : "") +
-                            (jCheckBox3.isSelected() ? "Baloncesto" : "") + "\n");
-
-                    JOptionPane.showMessageDialog(this, "Formulario guardado correctamente en " + archivoSeleccionado.getAbsolutePath(), "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    limpiarFormulario(); 
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(this, "Error al guardar el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Por favor, completa los campos resaltados en rojo.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+        try {
+            generacionPDF();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FormularioMatriculav2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -577,7 +500,110 @@ limpiarFormulario();
                 
             }
     }//GEN-LAST:event_formWindowClosing
+    
+    private void generacionPDF() throws FileNotFoundException{
+                boolean valid = true; 
+        Border defaultBorder = jTextField1.getBorder(); 
+        Border redBorder = BorderFactory.createLineBorder(Color.RED, 2); 
 
+       
+        jTextField1.setBorder(defaultBorder);
+        jTextField2.setBorder(defaultBorder);
+        jTextField3.setBorder(defaultBorder);
+        jTextField4.setBorder(defaultBorder);
+        jTextField5.setBorder(defaultBorder);
+        jTextField6.setBorder(defaultBorder);
+        jFormattedTextField1.setBorder(defaultBorder);
+
+       
+        if (jTextField1.getText().trim().isEmpty()) {
+            jTextField1.setBorder(redBorder);
+            jTextField1.requestFocus();
+            valid = false;
+        } else if (jTextField2.getText().trim().isEmpty()) {
+            jTextField2.setBorder(redBorder);
+            jTextField2.requestFocus(); 
+            valid = false;
+        } else if (jTextField3.getText().trim().isEmpty()) {
+            jTextField3.setBorder(redBorder);
+            jTextField3.requestFocus();
+            valid = false;
+        } else if (jTextField4.getText().trim().isEmpty()) {
+            jTextField4.setBorder(redBorder);
+            jTextField4.requestFocus(); 
+            valid = false;
+        } else if (jFormattedTextField1.getText().trim().isEmpty()) {
+            jFormattedTextField1.setBorder(redBorder);
+            jFormattedTextField1.requestFocus(); 
+            valid = false;
+        } else if (jTextField5.getText().trim().isEmpty()) {
+            jTextField5.setBorder(redBorder);
+            jTextField5.requestFocus();
+            valid = false;
+        } else if (jTextField6.getText().trim().isEmpty()) {
+            jTextField6.setBorder(redBorder);
+            jTextField6.requestFocus(); 
+            valid = false;
+        } else if (jComboBox1.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Selecciona un ciclo formativo.", "Ciclo obligatorio", JOptionPane.WARNING_MESSAGE);
+            jComboBox1.requestFocus();
+            valid = false;
+        } else if (jComboBox2.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Selecciona un turno.", "Turno obligatorio", JOptionPane.WARNING_MESSAGE);
+            jComboBox2.requestFocus();
+            valid = false;
+        }
+
+        if (valid) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar formulario"); 
+            int userSelection = fileChooser.showSaveDialog(this);
+
+           
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File archivoSeleccionado = fileChooser.getSelectedFile();
+             
+                if (!archivoSeleccionado.getName().toLowerCase().endsWith(".pdf")) {
+                    archivoSeleccionado = new File(archivoSeleccionado.getAbsolutePath() + ".pdf");
+                }
+                    
+                Document documento = new Document(new PdfDocument(new PdfWriter(archivoSeleccionado)));
+                List lista = new List();
+                    
+                
+                    documento.add(new Paragraph("Nombre: " + jTextField1.getText() + "\n"));
+                    documento.add(new Paragraph("Apellidos: " + jTextField2.getText() + "\n"));
+                    documento.add(new Paragraph("NIF: " + jTextField3.getText() + "\n"));
+                    documento.add(new Paragraph("Dirección: " + jTextField4.getText() + "\n"));
+                    documento.add(new Paragraph("C.P.: " + jFormattedTextField1.getText() + "\n"));
+                    documento.add(new Paragraph("Teléfono: " + jTextField5.getText() + "\n"));
+                    documento.add(new Paragraph("Email: " + jTextField6.getText() + "\n"));
+                    documento.add(new Paragraph("Ciclo: " + jComboBox1.getSelectedItem() + "\n"));
+                    documento.add(new Paragraph("Turno: " + jComboBox2.getSelectedItem() + "\n"));
+                    documento.add(new Paragraph("Actividades extraescolares: "));
+                            if(jCheckBox1.isSelected()){
+                                lista.add("Ajedrez " + "");
+                            } 
+                            if(jCheckBox2.isSelected()){
+                                lista.add("Futbol Sala " + "");
+                            }
+                            if(jCheckBox3.isSelected()){
+                                lista.add("Baloncesto" + "");
+                            }
+                            documento.add(lista);
+
+                    JOptionPane.showMessageDialog(this, "Formulario guardado correctamente en " + archivoSeleccionado.getAbsolutePath(), "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    documento.close();
+                    
+                    limpiarFormulario(); 
+                
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, completa los campos resaltados en rojo.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+    
     /**.
      * @param args the command line arguments
      */
